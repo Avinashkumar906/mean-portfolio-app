@@ -1,0 +1,38 @@
+<div class='section-block timeline-block'>
+    <div class='container-fluid'>
+        <div class='section-header'>
+            <h2 class="h2" data-aos="fade-right">My
+                <strong class='color'>Experience</strong>
+            </h2>
+        </div>
+
+        <ul class='timeline' *ngIf="experience; else noData">
+            <li *ngFor='let exp of experience' data-aos="fade-up">
+                <div class='timeline-content'>
+                    <h4>{{exp.college}}</h4>
+                    <em>
+                        <span>{{exp.title}},</span>
+                        <span>{{exp.date}}</span>
+                    </em>
+                    <p>
+                        {{exp.description}}
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <ng-template #noData>
+            <!-- *ngIf="pricing;else noData" -->
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="text-center">
+                        <h2 class="h2">
+                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;">
+                                add Experience
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

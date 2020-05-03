@@ -1,0 +1,102 @@
+<section class='section about-edit-section'>
+    <div class='section-block about-edit-block'>
+        <div class='container-fluid'>
+            <div class='section-header'>
+                <h2 class="h2">
+                    <strong class='color'>Resume page</strong>
+                </h2>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()" autocomplete="off">
+                <div class="row" formArrayName="education">
+                    <h3 class="h3 w-100">Education Section</h3>
+                    <div class="col-md-6 col-lg-4" *ngFor="let service of form.get('education')['controls']; let i = 'index'" [formGroupName]='i'>
+                        <div class="card">
+                            <div class="form-group">
+                                <input type="text" formControlName="title" placeholder="Your Degree Title.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="college" placeholder="Your College Name.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="date" placeholder="Yoour Passing Year.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea formControlName="description" placeholder="Your College Description.." rows="5" class="form-control"></textarea>
+                            </div>
+                            <div class="d-block mx-auto">
+                                <button type="button" class="btn" (click)="removeEducationGroup(i)">remove</button>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="form-group">
+                            <button type="button" class="card btn mx-auto" (click)="addEducationGroup()">Add Education</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" formArrayName="experience">
+                    <h3 class="h3 w-100">Experience Section</h3>
+                    <div class="col-md-6 col-lg-4" *ngFor="let service of form.get('experience')['controls']; let i = 'index'" [formGroupName]='i'>
+                        <div class="card">
+                            <div class="form-group">
+                                <input type="text" formControlName="title" placeholder="Your Designstion..." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="college" placeholder="Your Company Name.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="date" placeholder="Your Joining Year.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea formControlName="description" placeholder="Company Description" rows="5" class="form-control"></textarea>
+                            </div>
+                            <div class="d-block mx-auto">
+                                <button type="button" class="btn" (click)="removeExperienceGroup(i)">remove</button>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="form-group">
+                            <button type="button" class="card btn mx-auto" (click)="addExperienceGroup()">Add Skill</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" formArrayName="testimonial">
+                    <h3 class="h3 w-100">Testimonial Section</h3>
+                    <div class="col-md-6 col-lg-4" *ngFor="let service of form.get('testimonial')['controls']; let i = 'index'" [formGroupName]='i'>
+                        <div class="card">
+                            <div class="form-group">
+                                <input type="text" formControlName="clientName" placeholder="Client's Name.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="position" placeholder="Client's Designation.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="company" placeholder="Client's Company.." class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="5" formControlName="saying" placeholder="Client's Feedback.." class="form-control"></textarea>
+                            </div>
+                            <div class="d-block mx-auto">
+                                <button type="button" class="btn" (click)="removeTestimonialGroup(i)">remove</button>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="form-group text-center">
+                            <button type="button" class="card btn mx-auto" (click)="addTestimonialGroup()">Add Feedback</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100">
+                    <button type="submit" class="card btn mx-auto" [disabled]="!form.valid">
+                        submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

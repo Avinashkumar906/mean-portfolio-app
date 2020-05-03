@@ -1,0 +1,43 @@
+<div class='section-block services-block'>
+    <div class='container-fluid'>
+        <div class='section-header'>
+            <h2 class="h2" data-aos="fade-right">My
+                <strong class='color'>Services</strong>
+            </h2>
+        </div>
+
+        <div class='row' *ngIf="services;else noData">
+            <div class='col-sm-6 col-lg-3 p-2' data-aos="flip-left" *ngFor='let service of services'>
+                <div class='service'>
+                    <div class='icon'>
+                        <i [class]='service.image'></i>
+                    </div>
+                    <div class='content'>
+                        <h4 class="h4">
+                            <b>{{service?.title}}</b>
+                        </h4>
+                        <p class="p">
+                            {{service?.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #noData>
+                <!-- *ngIf="services;else noData" -->
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <h2 class="h2">
+                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;" >
+                                add Skills
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class='section-block timeline-block'>
+    <div class='container-fluid'>
+        <div class='section-header'>
+            <h2 class="h2" data-aos="fade-right">My
+                <strong class='color'>Education</strong>
+            </h2>
+        </div>
+
+        <ul class='timeline' *ngIf="education; else noData">
+            <li *ngFor='let edu of education' data-aos="fade-up">
+                <div class='timeline-content'>
+                    <h4>{{edu.college}}</h4>
+                    <em>
+                        <span>{{edu.title}},</span>
+                        <span>{{edu.date}}</span>
+                    </em>
+                    <p>
+                        {{edu.description}}
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <ng-template #noData>
+            <!-- *ngIf="pricing;else noData" -->
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="text-center">
+                        <h2 class="h2">
+                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;">
+                                add Education
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+
+</div>

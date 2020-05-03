@@ -1,0 +1,99 @@
+<section class='section contact-section'>
+    <div class='section-block contact-block' *ngIf="contact;else noData">
+        <div class='container-fluid'>
+            <div class='section-header'>
+                <h2 class="h2" data-aos="fade-right">Contact
+                    <strong class='color'>Me</strong>
+                </h2>
+            </div>
+            <div class='row' data-aos="fade-up">
+                <div class='col-md-7 col-lg-8'>
+                    <div class='contact-form'>
+                        <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()">
+                            <div id='contact-form-result'></div>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <input type='text' class='form-control' placeholder='Name' name='name' required minlength="3" ngModel #name="ngModel">
+                                        <small *ngIf='name.invalid && (name.dirty || name.touched)' id="passwordHelpBlock" class="form-text text-muted">
+                                            Your name must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or
+                                            emoji.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <input type='email' class='form-control' placeholder='Email' name='email' required email ngModel #email="ngModel">
+                                        <small *ngIf='email.invalid && (email.dirty || email.touched)' id="passwordHelpBlock" class="form-text text-muted">
+                                            Your name must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or
+                                            emoji.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='form-group'>
+                                <input type='text' class='form-control' placeholder='Subject' name='subject' required minlength="2" ngModel #subject="ngModel">
+                                <small *ngIf='subject.invalid && (subject.dirty || subject.touched)' id="passwordHelpBlock" class="form-text text-muted">
+                                    Your name must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or
+                                    emoji.
+                                </small>
+                            </div>
+                            <div class='form-group'>
+                                <textarea class='form-control' placeholder='Message' name='message' rows='5' required minlength="10" ngModel #message="ngModel"></textarea>
+                                <small *ngIf='message.invalid && (message.dirty || message.touched)' id="passwordHelpBlock" class="form-text text-muted">
+                                    Your name must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or
+                                    emoji.
+                                </small>
+                            </div>
+                            <div class='form-group text-center'>
+                                <button type='submit' [disabled]='!f.valid' class='btn-custom btn-color'>
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class='col-md-5 col-lg-4'>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56097.20197651673!2d77.27828439845588!3d28.507387437235753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce65f77cae949%3A0x7c768dbb3f78e57!2sBadarpur%2C%20New%20Delhi%2C%20India!5e0!3m2!1sen!2sus!4v1573471516998!5m2!1sen!2sus" width="100%" height="100%" frameborder="0" style="border:0;padding-bottom: 10px;" allowfullscreen=""></iframe>
+                </div>
+            </div>
+            <div class='w-100' data-aos="fade-in">
+                    <div class='contact-info-icons'>
+                        <div class='contact-info'>
+                            <span class="icon "><i class='fas fa-map-marked-alt'></i></span>
+                            <p class="p">
+                                {{ contact ? contact?.address?.line1 : undefined }}<br>
+                                {{ contact ? contact?.address?.line2 : undefined }}
+                            </p>
+                        </div>
+                        <div class='contact-info'>
+                            <span class="icon "><i class='fas fa-phone'></i></span>
+                            <p class="p">
+                                {{ contact ?  contact?.contact?.mob : undefined}}<br>
+                                {{ contact ?  contact?.contact?.email : undefined}}
+                            </p>
+                        </div>
+                        <div class='contact-info'>
+                            <span class="icon "><i class='fas fa-globe'></i></span>
+                            <p class="p">
+                                {{ contact ?  contact?.web?.url : undefined}}<br> 
+                                {{ contact ?  contact?.web?.url2 : undefined}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <ng-template #noData>
+        <!-- *ngIf="pricing;else noData" -->
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-center">
+                    <h2 class="h2">
+                        Unable to connect to server!
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</section>

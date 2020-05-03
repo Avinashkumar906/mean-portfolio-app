@@ -1,0 +1,27 @@
+<div class='section-block testimonials-block'>
+    <div class='container-fluid'>
+        <div class='section-header'>
+            <h2 class="h2" data-aos="fade-right">My
+                <strong class='color'>Clients</strong>
+            </h2>
+        </div>
+        <owl-carousel [options]="carouselOptions" [items]="testimonial" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+            <div class="item" *ngFor="let item of testimonial;let i= index" data-aos="flip-right">
+                <div class='testimonial'>
+                    <div class='icon'>
+                        <i class='fas fa-quote-left'></i>
+                    </div>
+                    <p class="p text-justify">
+                        {{item.saying}}
+                    </p>
+                    <div class='author'>
+                        <h4 class="h4">{{item.clientName}}</h4>
+                        <span>{{item.position}} at {{item.company}}</span>
+                    </div>
+                </div>
+            </div>
+        </owl-carousel>
+        <!-- </div> -->
+    </div>
+
+</div>

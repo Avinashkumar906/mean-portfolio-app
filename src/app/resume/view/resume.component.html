@@ -1,0 +1,26 @@
+<section id='resume' class='section resume-section border-d'>
+
+    <div *ngIf='resume ; else noData'>
+
+        <app-education [education]='resume && resume?.education ? resume?.education : undefined '></app-education>
+
+        <app-experience [experience]='resume && resume?.experience ? resume?.experience : undefined '></app-experience>
+
+        <app-testimonial [testimonial]='resume && resume?.testimonial ? resume?.testimonial : undefined '></app-testimonial>
+
+    </div>
+    
+    <ng-template #noData>
+        <!-- *ngIf="pricing;else noData" -->
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-center">
+                    <h2 class="h2">
+                        Unable to connect to server!
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</section>

@@ -1,0 +1,158 @@
+$screen-sm-min: 576px;
+$screen-md-min: 768px;
+$screen-lg-min: 992px;
+
+$color:#273746;
+$border: 1px solid #ABB2B9;
+
+$blue: #809BCE;
+$purple: #9893DA;
+$grey: #C3C3D8;
+
+// mixin defination
+@mixin sm{
+    @media(min-width:#{$screen-sm-min}){
+        @content;
+    }
+}
+@mixin md{
+    @media(min-width:#{$screen-md-min}){
+        @content;
+    }
+}
+@mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+
+.section-block{
+    .section-header{
+        position: relative;
+        margin-bottom: 80px;
+        h2{
+            color: $blue;
+            text-shadow: 3px 3px 5px rgba($color: #000000, $alpha: .1);
+        }
+    }
+    form{
+        padding: 0;
+        @include sm {
+            padding: 0;
+            border: none;
+        }
+        @include md {
+            padding: 10px;
+            border: none;
+        }
+        @include lg {
+            padding: 20;
+            border: none;
+        }
+        .form-row{
+            // margin-bottom: 30px;
+            .relative{
+                position: relative;
+            }
+            .h3{
+                height: auto;
+                padding: 10px 2px;
+                font-size: 20px;
+                color: $blue;
+                text-shadow: 3px 3px 5px rgba($color: #000000, $alpha: .1);
+                font-weight: 400;
+                text-align: center;
+            }
+            .form-group .form-control
+            {
+                outline:none;
+                background: rgba(255, 255, 255, .5);
+                font-size: 16px; 
+                color: $color;           
+                border: $border;
+                &::placeholder {
+                    color: #C3C3D8;
+                    font-size: 16px;
+                }
+                &:focus {
+                    outline: 0;
+                    border: 1px solid rgba($blue, 0.7);
+                    transition: 0.6s all ease;
+                }
+            }  
+            .col-md-6,            
+            .col-md-4,            
+            .col-md-12{
+                padding: 3px;
+            }            
+        }
+    }
+    .card{
+        margin: 10px 3px;
+        padding: 20px 10px;
+        background: whitesmoke;
+        border-radius: 3px;
+        box-shadow: 2px 2px 5px rgba($color: #000000, $alpha: .1)
+    }
+    .btn{
+        font-weight: bold;
+        border-radius: 0px;
+        padding:10px 20px;
+        background: none;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        border:$border; 
+        transition: all 250ms; 
+    }
+    .btn:hover{
+        color: #F7F9F9;
+        background: #ABB2B9;
+        border:1px solid #F7F9F9;
+    }
+}
+.icon{
+    margin: 0 0 0 5px;
+    font-size: 35px;
+    line-height: 35px;
+    color: #ABB2B9;
+    vertical-align: middle;
+    &:hover{
+        color:$color;
+    }
+}
+.close-icon{
+    position: absolute;
+    opacity: 0;
+    right: 26px;
+    margin: 0 0 0 5px;
+    font-size: 20px;
+    line-height: 35px;
+    color: #ABB2B9;
+    vertical-align: middle;
+    &:hover{
+        color:$color;
+        opacity: .8;
+        transition: all .4s;
+    }
+}
+.close-card-icon{
+    opacity: 0.5;
+    position: absolute;
+    border-radius: 18px;
+    top: 0;
+    top: -15px;
+    left: -10px;
+    padding: 0;
+    font-size: 26px;
+    color: #ABB2B9;
+    vertical-align: middle;
+    &:hover{
+        color:$color;
+        opacity: .8;
+        transition: opacity .4s;
+    }
+}
+.p{
+    text-transform: capitalize;
+    color: $blue;
+}

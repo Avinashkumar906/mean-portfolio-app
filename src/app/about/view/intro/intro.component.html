@@ -1,0 +1,67 @@
+<div class='section-block about-block'>
+    <div class='container-fluid'>
+        <div class='section-header'>
+            <h2 class="h2" data-aos="fade-right">
+                I'm a
+                <strong class='color'>{{ about?.designation }}</strong>
+            </h2>
+        </div>
+        <div class='row' *ngIf="about ;else noData">
+            
+            <div class='col-lg-5' data-aos="zoom-in">
+                <ul class='info-list'>
+                    <li>
+                        <strong>Name:</strong>
+                        <span>{{ about?.name }}</span>
+                    </li>
+                    <li>
+                        <strong>Job:</strong>
+                        <span>{{ about?.position }}</span>
+                    </li>
+                    <li>
+                        <strong>Age:</strong>
+                        <span>{{ calculateAge() }} Year old</span>
+                    </li>
+                    <li>
+                        <strong>Residence:</strong>
+                        <span>{{ about?.country }}</span>
+                    </li>
+                    <li>
+                        <strong>Hometown:</strong>
+                        <span>{{ about?.city }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class='col-lg-7' data-aos="zoom-in">
+                <div class='about-text'>
+                    <p style="white-space: pre-wrap;">{{about?.description}}</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class='about-btns text-center'>
+                    <a class='btn-color' data-aos="fade-right">
+                        Download Resume
+                    </a>
+                    <a class='btn-color' data-aos="fade-left">
+                        Hire Me
+                    </a>
+                </div>
+            </div>
+        </div>
+        <ng-template #noData>
+                <!-- *ngIf="pricing;else noData" -->
+            <div class="row">
+                <div class="col">
+                    <div class="text-center">
+                        <h2 class="h2">
+                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;" >
+                                add introduction
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

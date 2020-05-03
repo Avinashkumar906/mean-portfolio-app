@@ -1,0 +1,24 @@
+<section class='section about-section'>
+    <div *ngIf='about ; else noData'>
+
+        <app-intro [about]='about'></app-intro>
+        
+        <app-service [services]='about && about.services ? about.services : undefined'></app-service>
+
+        <app-skill [skills]='about && about.skills ? about.skills : undefined'></app-skill>
+
+        <app-pricing [pricing]='about && about.pricing ? about.pricing : undefined'></app-pricing>
+
+    </div>
+    <ng-template #noData>
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-center">
+                    <h2 class="h2">
+                        Unable to connect to server!
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</section>

@@ -1,0 +1,27 @@
+.item{
+	display: block;
+	margin: 15px;
+	box-sizing: border-box;
+}
+.owl-theme .owl-dot{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+	// padding:15px 0;
+	// margin:-15px 0;
+	margin-right:3px;
+}
+.owl-theme .owl-dot > span{
+	display:block;
+	height:6px;
+	width:36px;
+	margin-right:7px;
+	background:#303F9F;
+	opacity:.4;
+}
+.owl-theme .owl-dot.active > span{
+	opacity:1;
+}
+// .owl-item{
+// 	margin: 0 15px;
+// }

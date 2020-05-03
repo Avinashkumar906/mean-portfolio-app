@@ -1,0 +1,27 @@
+<ngx-smart-modal #myModal identifier="myModal" [closable]="false">
+    <!--project popup-->
+    <div class='popup-box' *ngIf='myModal.hasData()'>
+        <figure>
+
+            <!--project popup image-->
+            <img [src]='myModal.getData().image'>
+
+        </figure>
+        <div class='content'>
+
+            <!-- project popup title -->
+            <h4 class="h4">{{myModal.getData().title | json}}</h4>
+
+            <!--project popup description-->
+            <p class="p text-justify text-muted em">
+                {{myModal.getData().description | json}}
+            </p>
+            <div class="text-center">
+                <button class="btn-custom btn-color" (click)="myModal.removeData();myModal.close()">Close</button>
+            </div>
+        </div>
+
+
+    </div>
+
+</ngx-smart-modal>

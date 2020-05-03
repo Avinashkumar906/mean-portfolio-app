@@ -1,0 +1,59 @@
+<section class='section portfolio-section'>
+    <div class='section-block portfolio-block'>
+        <div class='container-fluid' *ngIf="portfolio;else noData">
+            <app-project-modal></app-project-modal>
+            <div class='section-header'>
+                <h2 class="h2" data-aos="fade-right">My
+                    <strong class='color'>Works</strong>
+                </h2>
+            </div>
+
+            <ul class='portfolio-filters' data-aos="fade-up">
+                <li>
+                    <a class='active' data-group='all' (click)='portfolioFilter($event)'>
+                        All
+                    </a>
+                </li>
+                <li>
+                    <a data-group='web' (click)='portfolioFilter($event)'>
+                        Web
+                    </a>
+                </li>
+                <li>
+                    <a data-group='tech' (click)='portfolioFilter($event)'>
+                        Tech
+                    </a>
+                </li>
+                <li>
+                    <a data-group='photography' (click)='portfolioFilter($event)'>
+                        Photography
+                    </a>
+                </li>
+            </ul>
+
+            <ul class='portfolio-items' id="grid">
+                <li class="items" *ngFor="let item of getProjects();let i = index" data-aos="flip-right" attr.data-groups='"[{{item.group}}]"'>
+                    <div class='inner'>
+                        <img [src]='item.image'>
+                        <div class='overlay'>
+                            <a  class='view-project btn-color' (click)="openPopup(i)">
+                                See Details
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ng-template #noData>
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="text-center">
+                    <h2 class="h2">
+                        Unable to connect to server!
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</section>
