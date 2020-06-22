@@ -1,34 +1,45 @@
 <section class='section section-main' [style.background-image]="bgImageUrl">
-        <div class='d-flex h-100 align-items-center justify-content-center'>
-            <div class='inner'>
-                <div class='intro-text' *ngIf="user;else noData" data-aos="fade-in">
-                    <h1 class="h1" data-aos="flip-up">
-                        <span>Hey, I'm </span>                        
-                        <span class="highlight"> {{ user?.name }}.</span>
-                    </h1>
-                    <p class="p" data-aos="flip-down">{{user?.bio}}</p>
-                    <div class='intro-btns'>    
-                        <a [routerLink]="['/about']" data-aos="fade-right" class='btn-custom' style="text-decoration: none;">
-                            Discover More
-                        </a>
-                        <a [routerLink]="['/contact']" data-aos="fade-left" class='btn-custom' style="text-decoration: none;">
-                            Hire Me
-                        </a>
-                    </div>
-                </div>
-                <ng-template #noData>
-                    <div class="intro-text ">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="text-center text-light">
-                                    <h2 class="h2">
-                                        Unable to connect to server!
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-            </div>
+	<div class='d-flex h-100 align-items-center justify-content-center'>
+		<div class='inner'>
+			<div class='intro-text' *ngIf="user;else noData" data-aos="fade-in">
+				<h1 class="h1" data-aos="flip-up">
+					<span>Hey, I'm </span>
+					<span class="highlight" (click)="toggleEdit()"> {{ user?.name }}.</span>
+				</h1>
+				<p class="p" data-aos="flip-down" (click)="toggleEdit()">{{user?.bio}}</p>
+				<div *ngIf="isEditMode()" class="w-100">
+          <div class="form-group">
+            <input class="form-control" type="text" [(ngModel)]="user.name"/>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="3" [(ngModel)]="user.bio"></textarea>
+          </div>
+          <a class='btn-custom text-light' (click)="saveToServer()" style="text-decoration: none;">Save</a>
         </div>
+				<div *ngIf="!isEditMode()" class='intro-btns'>
+					<a [routerLink]="['/about']" data-aos="fade-right" class='btn-custom'
+						style="text-decoration: none;">
+						Discover More
+					</a>
+					<a [routerLink]="['/contact']" data-aos="fade-left" class='btn-custom'
+						style="text-decoration: none;">
+						Hire Me
+					</a>
+				</div>
+			</div>
+			<ng-template #noData>
+				<div class="intro-text ">
+					<div class="row align-items-center">
+						<div class="col">
+							<div class="text-center text-light">
+								<h2 class="h2">
+									Unable to connect to server!
+								</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+		</div>
+	</div>
 </section>

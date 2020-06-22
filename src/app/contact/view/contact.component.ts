@@ -5,6 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserserviceService } from '../../service/userservice.service';
 import { HttpserviceService } from '../../service/httpservice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -21,14 +22,16 @@ export class ContactComponent implements OnInit {
   constructor(
     private userService: UserserviceService,
     private spinner: NgxSpinnerService,
-    private httpService:HttpserviceService
+    private httpService:HttpserviceService,
+    private authService:AuthService
   ) { }
-  
+
   ngOnInit() {
     this.userSubscription = this.userService.userData
     .pipe(pluck('contact'))
     .subscribe(
-      (contact) => { 
+      (contact) => {
+        console.log(contact)
         this.contact = contact;
       },
       (err)=>console.log(err),
@@ -42,9 +45,9 @@ export class ContactComponent implements OnInit {
         if(response[0].statusCode === 202){
           this.form.resetForm()
           alert('Mail send!')
-          this.spinner.hide() 
+          this.spinner.hide()
         } else {
-          this.spinner.hide() 
+          this.spinner.hide()
           alert('unable to send mail!')
           throw new Error('unable to send mail!')
         }
@@ -55,8 +58,24 @@ export class ContactComponent implements OnInit {
       },
     )
   }
+  isLogged(){
+    return this.authService.isAuthenticated()
+  }
+  toggleEdit(){
+    this.authService.toggleEditmaode();
+  }
+  isEditMode(){
+    return this.authService.isEditMode();
+  }
+  saveContactData(){
+    this.httpService.postUserContactSection().subscribe(
+      data=>{
+        alert('Updated Successfully!')
+      },
+      err=>alert('Server Error!')
+    )
+  }
   ngOnDestroy(){
     this.userSubscription.unsubscribe()
   }
-
 }

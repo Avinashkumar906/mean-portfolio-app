@@ -1,35 +1,55 @@
 <div class='section-block skills-block'>
-    <div class='container-fluid'>
-        <div class='section-header'>
-            <h2 class="h2" data-aos="fade-right">
-                My
-                <strong class='color'>Skills</strong>
-            </h2>
-        </div>
+	<div class='container-fluid'>
+		<div class='section-header'>
+			<h2 class="h2" data-aos="fade-right">
+				My
+				<strong class='color'>Skills</strong>
+			</h2>
+		</div>
 
-        <div class='row' *ngIf=" skills ; else noData">
-            <div class='col-md-6' *ngFor='let skill of skills' data-aos="flip-left">
-                <div class='skill'>
-                    <h4 class="h4">{{ skill?.title }}</h4>
-                    <div class='bar'>
-                        <div class='percent' [style.width.%]='skill?.progress'></div>
-                    </div>
-                </div>
+		<div class='row' *ngIf=" skills ; else noData">
+			<div class='col-md-6' *ngFor='let skill of skills;let i = index' data-aos="flip-left">
+				<div class='skill'>
+					<h4 class="h4">{{ skill?.title }}</h4>
+					<div class='bar'>
+						<div class='percent' [style.width.%]='skill?.progress'></div>
+					</div>
+          <div class="w-100 text-center mt-1" *ngIf="isEditMode()">
+            <button type="button" class="btn-color" (click)="removeSkill(i)">remove</button>
+          </div>
+				</div>
+			</div>
+      <div class='w-100' data-aos="flip-left" *ngIf="isEditMode()">
+				<div class='skill m-auto col-md-6'>
+          <form #skill="ngForm" (ngSubmit)="skill.form.valid && onSubmit(skill)">
+            <div class="form-row">
+              <div class="form-group col-6">
+                <input type="text" name="title" class="form-control" placeholder="Title" ngModel required>
+              </div>
+              <div class="form-group col-6">
+                <input type="number" name="progress" class="form-control" placeholder="Progress" ngModel required pattern="^[0-9][0-9]?$|^100$" >
+              </div>
+              <div class="form-group col-12 text-center">
+                <button type="submit" class="btn-color" [disabled]="!skill.valid">Add</button>
+              </div>
             </div>
-        </div>
-        
-        <ng-template #noData>
-            <div class="row">
-                <div class="col">
-                    <div class="text-center">
-                        <h2 class="h2">
-                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;" >
-                                add Skills
-                            </a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-    </div>
+          </form>
+				</div>
+			</div>
+		</div>
+
+		<ng-template #noData>
+			<div class="row">
+				<div class="col">
+					<div class="text-center">
+						<h2 class="h2">
+							<a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;">
+								add Skills
+							</a>
+						</h2>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-skill',
@@ -12,23 +14,22 @@ export class SkillComponent implements OnInit {
     progress: number;
   }>
 
-  constructor() { }
+  constructor(
+    private authService:AuthService
+  ) { }
 
   ngOnInit() {
   }
 
-  getEven(n?:number,x?:number):Array<any>{
-    let arr = []
-    for(let i = 0; i < this.skills.length; i+=2){
-      arr.push(this.skills[i])
-    }
-    return arr;
+  onSubmit(form:NgForm){
+    this.skills.push(form.value)
   }
-  getOdd(n?:number,x?:number):Array<any>{
-    let arr = []
-    for(let i = 1; i < this.skills.length; i+=2){
-      arr.push(this.skills[i])
-    }
-    return arr;
+
+  removeSkill(index:number){
+    this.skills.splice(index,1);
+  }
+
+  isEditMode(){
+    return this.authService.isEditMode();
   }
 }

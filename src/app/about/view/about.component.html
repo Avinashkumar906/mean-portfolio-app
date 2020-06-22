@@ -1,24 +1,29 @@
 <section class='section about-section'>
-    <div *ngIf='about ; else noData'>
+	<div *ngIf='about ; else noData'>
 
-        <app-intro [about]='about'></app-intro>
-        
-        <app-service [services]='about && about.services ? about.services : undefined'></app-service>
+		<app-intro [about]='about'></app-intro>
 
-        <app-skill [skills]='about && about.skills ? about.skills : undefined'></app-skill>
+		<app-service [services]='about && about.services ? about.services : undefined'></app-service>
 
-        <app-pricing [pricing]='about && about.pricing ? about.pricing : undefined'></app-pricing>
+		<app-skill [skills]='about && about.skills ? about.skills : undefined'></app-skill>
 
-    </div>
-    <ng-template #noData>
-        <div class="row align-items-center">
-            <div class="col">
-                <div class="text-center">
-                    <h2 class="h2">
-                        Unable to connect to server!
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </ng-template>
+		<app-pricing [pricing]='about && about.pricing ? about.pricing : undefined'></app-pricing>
+
+		<div *ngIf="isLogged()" class="sticky-bottom">
+			<button class="btn-color sticky-bottom-button mx-1" (click)="saveAboutData()">Save</button>
+			<button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">edit</button>
+		</div>
+
+	</div>
+	<ng-template #noData>
+		<div class="row align-items-center">
+			<div class="col">
+				<div class="text-center">
+					<h2 class="h2">
+						Unable to connect to server!
+					</h2>
+				</div>
+			</div>
+		</div>
+	</ng-template>
 </section>

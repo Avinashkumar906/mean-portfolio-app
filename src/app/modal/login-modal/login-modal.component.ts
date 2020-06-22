@@ -26,11 +26,11 @@ export class LoginModalComponent implements AfterViewInit{
   isLoginPageFlag:boolean = true;
   animationState = true;
   constructor(
-    private authService: AuthService, 
-    private router: Router, 
-    private modalPopup:NgxSmartModalService
+    private authService: AuthService,
+    private router: Router,
+    private modalPopup:NgxSmartModalService,
   ) { }
-  
+
   ngAfterViewInit(){
   }
 
@@ -54,13 +54,14 @@ export class LoginModalComponent implements AfterViewInit{
     this.authService.signupUser(f.value).subscribe(
       (response : any)=>{
         if(response){
-          response=>this.modalPopup.close('loginModal')
+          alert('User created!')
+          this.modalPopup.close('loginModal')
         }
       },
-      (err)=>alert(err.error.message)
+      (err)=>alert(err.message)
     )
   }
-  redirect(){
-    this.router.navigate(['index'])
-  }
+  // redirect(){
+  //   this.router.navigate(['index'])
+  // }
 }

@@ -5,8 +5,8 @@
                 <strong class='color'>Clients</strong>
             </h2>
         </div>
-        <owl-carousel [options]="carouselOptions" [items]="testimonial" [carouselClasses]="['owl-theme', 'row', 'sliding']">
-            <div class="item" *ngFor="let item of testimonial;let i= index" data-aos="flip-right">
+        <owl-carousel [options]="carouselOptions" [items]="testimonial" [carouselClasses]="['owl-theme', 'sliding']">
+            <div class="item" *ngFor="let item of testimonial;let i= index" data-aos="fade-in">
                 <div class='testimonial'>
                     <div class='icon'>
                         <i class='fas fa-quote-left'></i>
@@ -18,10 +18,11 @@
                         <h4 class="h4">{{item.clientName}}</h4>
                         <span>{{item.position}} at {{item.company}}</span>
                     </div>
+                    <div class="text-center mt-2" *ngIf="isEditMode()">
+                      <button class="btn-color mr-auto" (click)="removeComment(i)">remove</button>
+                    </div>
                 </div>
             </div>
         </owl-carousel>
-        <!-- </div> -->
     </div>
-
 </div>

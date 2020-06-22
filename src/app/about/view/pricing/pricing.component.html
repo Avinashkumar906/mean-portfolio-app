@@ -1,30 +1,55 @@
 <div class='section-block pricing-block' >
-	<div class="container-fluid">		
+	<div class="container-fluid">
         <div class='section-header' data-aos="fade-right">
             <h2 class="h2">My <strong class='color' >Pricing</strong></h2>
         </div>
-         
-        <div class='row' *ngIf="pricing;else noData">    
-            <div class='col-sm-6 col-lg-4 p-2' data-aos="flip-left" *ngFor='let price of pricing'>
-                <div class='p-table' >                   
-                    <div class='header' >                        
-                        <h4 class="h4">{{price.title}}</h4>                        
+
+        <div class='row' *ngIf="pricing;else noData">
+            <div class='col-md-4 p-2' data-aos="flip-left" *ngFor='let price of pricing;let j = index'>
+                <div class='p-table m-auto' >
+                    <div class='header' >
+                        <h4 class="h4">{{price.title}}</h4>
                         <div class='price' >
                             <span class='currency' >$</span>
                             <span class='amount' >{{price.price}}</span>
                             <span class='period' >/HR</span>
-                        </div>                        
-                    </div>                    
+                        </div>
+                    </div>
                     <ul class='items' >
                         <li *ngFor='let service of price.services; let i = index'>
                             {{(i+1) + ' ' + service}}
                         </li>
-                    </ul>                    
-                    <a class='btn-custom btn-color' [style.cursor]='"pointer"' >
-                        Choose This
-                    </a>
+                    </ul>
+                    <div class="px-2">
+                      <button class='btn-color m-1'>
+                          Choose This
+                      </button>
+                      <button *ngIf="isEditMode()" class='btn-color m-1' (click)="removePricing(j)">
+                          Remove
+                      </button>
+                    </div>
                 </div>
-            </div>  
+            </div>
+            <div class="w-100 text-center" *ngIf="isEditMode()">
+              <div class="col-md-6 m-auto">
+                <form #price="ngForm" (ngSubmit)="price.valid && onSubmit(price)" novalidate>
+                  <div class="form-row">
+                    <div class="form-group col-6">
+                      <input type="text" class="form-control" placeholder="Title" name="title" ngModel required>
+                    </div>
+                    <div class="form-group col-6">
+                      <input type="number" class="form-control" placeholder="Price" name="price" ngModel required maxlength="2">
+                    </div>
+                    <div class="form-group col-12">
+                      <textarea name="services" placeholder="Services ' , ' Separated" class="form-control" rows="3" ngModel required></textarea>
+                    </div>
+                    <div class="col-12 text-center">
+                      <button type="submit" class="btn-color" [disabled]="!price.valid">add</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
         </div>
         <ng-template #noData>
             <div class="row">

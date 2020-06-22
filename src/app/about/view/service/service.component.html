@@ -6,8 +6,8 @@
             </h2>
         </div>
 
-        <div class='row' *ngIf="services;else noData">
-            <div class='col-sm-6 col-lg-3 p-2' data-aos="flip-left" *ngFor='let service of services'>
+        <div class='row' *ngIf="services && services.length>0;else noData">
+            <div class='col-sm-6 col-lg-3 p-2' data-aos="flip-left" *ngFor='let service of services;let i = index'>
                 <div class='service'>
                     <div class='icon'>
                         <i [class]='service.image'></i>
@@ -20,7 +20,30 @@
                             {{service?.description}}
                         </p>
                     </div>
+                  <div class="w-100 service-btn" *ngIf="isEditMode()">
+                    <button type="button" class="btn-color" (click)="removeService(i)">remove</button>
+                  </div>
                 </div>
+            </div>
+            <div class='w-100 p-2' data-aos="flip-left" *ngIf="isEditMode()">
+				      <div class='service m-auto col-md-6'>
+                <form #service="ngForm" (ngSubmit)="service.valid && onSubmit(service)" novalidate>
+                  <div class="form-row">
+                    <div class="form-group col-6">
+                      <input type="text" class="form-control" name="image" placeholder="FA Class" ngModel required>
+                    </div>
+                    <div class="form-group col-6">
+                      <input type="text" class="form-control" name="title" placeholder="Title" ngModel required>
+                    </div>
+                    <div class="form-group col-12">
+                      <textarea class="form-control" name="description" rows="4" placeholder="Description" ngModel required></textarea>
+                    </div>
+                    <div class="form-group col-12 text-center">
+                      <button type="submit" class="btn-color" [disabled]="!service.valid">add</button>
+                    </div>
+                  </div>
+                </form>
+				      </div>
             </div>
         </div>
 

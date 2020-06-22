@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'] 
+  styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit {
   constructor(
@@ -17,11 +17,11 @@ export class EditComponent implements OnInit {
     private httpService: HttpserviceService,
     private router:Router
   ) { }
-  
+
   form:FormGroup;
-  user = this.userService.getUser(); 
+  user = this.userService.getUser();
   userSubscrition = new Subscription;
-    
+
   ngOnInit() {
     this.form = this.formBuilder.group({
       email:[null,Validators.required],
@@ -53,7 +53,7 @@ export class EditComponent implements OnInit {
     this.userSubscrition = this.userService.userData.subscribe(
       user=>this.form.patchValue(user),
       err=>{}
-    ) 
+    )
   }
 
   upload(event){
@@ -71,7 +71,7 @@ export class EditComponent implements OnInit {
   }
 
   onSubmit(){
-    this.httpService.postUserSection(this.form.value).subscribe(
+    this.httpService.postUserContactSection(this.form.value).subscribe(
       (response:any)=>{
         this.form.reset()
         this.httpService.getUserData();

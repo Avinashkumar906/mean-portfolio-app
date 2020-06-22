@@ -7,7 +7,7 @@
                 </h2>
             </div>
 
-            <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="row" formArrayName="project">
                     <h3 class="h3 w-100">Project Section</h3>
                     <div class="col-md-6 col-lg-4" *ngFor="let portfolio of form.get('project')['controls']; let i = 'index'" [formGroupName]='i'>
@@ -36,7 +36,7 @@
                                 </div>
                                 <div formArrayName="group" class="col-12">
                                     <div class="form-group d-flex" *ngFor="let x of portfolio.get('group')['controls']; let y = index">
-                                        <input type="text" [formControlName]="y" placeholder="Project's group.." class="form-control">  
+                                        <input type="text" [formControlName]="y" placeholder="Project's group.." class="form-control">
                                         <span class="close-icon" (click)="removeGroup(i,y)">
                                             <i class="fas fa-minus-circle"></i>
                                         </span>
@@ -54,7 +54,7 @@
                     <div class="col-12 text-center">
                             <div class="">
                                 <button type="button" class="card btn d-inline-block" (click)="addPortfolioGroup()">Add Project</button>
-                                <button type="submit" class="card btn d-inline-block" [disabled]="!form.valid"> submit</button>
+                                <button type="submit" class="card btn d-inline-block" > submit</button>
                             </div>
                     </div>
                 </div>

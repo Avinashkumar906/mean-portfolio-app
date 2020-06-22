@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-navbar-menu',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService:AuthService,
+    private modalService :NgxSmartModalService
+  ) { }
 
   ngOnInit() {
   }
-  
+
+  toggleSignin(){
+    if(!this.authService.isAuthenticated())
+      this.modalService.open('loginModal')
+    else
+      localStorage.removeItem("token")
+  }
+  isloggedIn(){
+    return this.authService.isAuthenticated()
+  }
+
 }

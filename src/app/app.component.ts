@@ -11,23 +11,22 @@ import * as AOS from 'aos';
   animations: [ routerTransition ]
 })
 export class AppComponent implements OnInit {
-  
+
   title = 'MEAN N5xtemplate';
-  
+
   constructor(
     private httpService:HttpserviceService,
   ) {}
-  
+
   prepareRoute(outlet: RouterOutlet) {
     return outlet.isActivated ? outlet.activatedRoute: '';
   }
-  
+
   ngOnInit(){
-    this.httpService.getUserData() 
+    this.httpService.getUserData()
     AOS.init({
-      duration: 600,
+      duration: 500,
       easing: 'ease-in-back',
-      delay: 200,
     })
   }
 

@@ -50,6 +50,7 @@ export class User{
     portfolio:{
         project:Array<{
             name:string;
+            public_id:string;
             image:string;
             title:string;
             description:string;

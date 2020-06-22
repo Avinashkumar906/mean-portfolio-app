@@ -20,23 +20,28 @@ export class EditPortfolioComponent implements OnInit {
     private httpService: HttpserviceService,
     private router: Router
   ) { }
-  
+
   form: FormGroup;
-  user = this.userService.getUser(); 
+  user = this.userService.getUser();
   userSubscrition = new Subscription;
-  
+
   ngOnInit() {
     this.form = this.formBuilder.group({
       project: this.formBuilder.array([
-        this.initPortfolio(), 
-        this.initPortfolio(), 
-        this.initPortfolio()
+        // this.initPortfolio(),
+        // this.initPortfolio(),
+        // this.initPortfolio()
       ])
     })
     this.userSubscrition = this.userService.userData.subscribe(
-      user=>this.form.patchValue(user.portfolio),
+      user=>{
+        for(let i = 0; i < user.portfolio.project.length; i++){
+          this.addPortfolioGroup();
+        }
+        this.form.patchValue(user.portfolio)
+      },
       err=>{}
-    ) 
+    )
   }
 
   onSubmit(){
@@ -87,7 +92,7 @@ export class EditPortfolioComponent implements OnInit {
       youtube:[null, Validators.required],
       link:[null, Validators.required],
       group:this.formBuilder.array([
-        this.initControl()          
+        this.initControl()
       ])
     })
   }

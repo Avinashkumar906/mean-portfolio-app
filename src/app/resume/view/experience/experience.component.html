@@ -7,7 +7,7 @@
         </div>
 
         <ul class='timeline' *ngIf="experience; else noData">
-            <li *ngFor='let exp of experience' data-aos="fade-up">
+            <li *ngFor='let exp of experience;let i = index' data-aos="fade-up">
                 <div class='timeline-content'>
                     <h4>{{exp.college}}</h4>
                     <em>
@@ -17,6 +17,34 @@
                     <p>
                         {{exp.description}}
                     </p>
+                    <div class="text-center mt-2" *ngIf="isEditMode()">
+                      <button class="btn-color" (click)="removeEducation(i)">remove</button>
+                  </div>
+                </div>
+            </li>
+            <li data-aos="fade-up" *ngIf="isEditMode()">
+                <div class='timeline-content'>
+                  <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit(form)" novalidate>
+                    <div class="form-row">
+                      <div class="form-group col-12">
+                        <input class="form-control" name="college" type="text" placeholder="School Name" ngModel required minlength="6">
+                      </div>
+                      <div class="form-group col-6">
+                          <input class="form-control" name="title" type="text" placeholder="Title" ngModel required minlength="3">
+                      </div>
+                      <div class="form-group col-6">
+                          <input class="form-control" name="date" type="text" placeholder="Date" ngModel required minlength="6">
+                      </div>
+                      <div class="col-12">
+                        <textarea class="form-control" name="description" rows="2" placeholder="Description" ngModel required minlength="10"></textarea>
+                      </div>
+                      <div class="col-12">
+                        <div class="text-center mt-2">
+                          <button type="submit" class="btn-color mr-2" [disabled]="!form.form.valid">add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
             </li>
         </ul>

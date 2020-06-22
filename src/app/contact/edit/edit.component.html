@@ -8,33 +8,11 @@
             </div>
 
             <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()" autocomplete="off" novalidate>
-                <div class="card">
+                <!-- <div class="card">
                     <div class='form-row m-0 p-1'>
-                        <h3 class="h3 w-100">Home Section</h3>
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" formControlName="name" placeholder="Your Name..">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" formControlName="bio" placeholder="Short Bio..">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" formControlName="email" placeholder="Your Email..">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="password" class="form-control" formControlName="password" placeholder="Your Password..">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input type="file" class="form-control-file" (change)="upload($event)">
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-3"></div>
-                        <!-- //*ngIf="form.value.image" -->
-                        <div class="form-group col-6"> 
-                            <img [src]="form.value.image" alt="No image">
-                        </div>
-                        <div class="col-3"></div>
+                        <h3 class="h3 w-100">Contact Section</h3>
                     </div>
-                </div>
+                </div> -->
                 <div class='row' formGroupName="contact">
                     <div class='col-md-6 col-lg-4' formGroupName="address">
                         <div class="card h-auto">
