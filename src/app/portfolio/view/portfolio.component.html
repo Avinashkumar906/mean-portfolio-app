@@ -25,8 +25,18 @@
 					</a>
 				</li>
 				<li>
-					<a data-group='photography' (click)='portfolioFilter($event)'>
-						Photography
+					<a data-group='gallery' (click)='portfolioFilter($event)'>
+						Gallery
+					</a>
+				</li>
+				<li>
+					<a data-group='business' (click)='portfolioFilter($event)'>
+						Business
+					</a>
+				</li>
+				<li>
+					<a data-group='demo' (click)='portfolioFilter($event)'>
+						Demo
 					</a>
 				</li>
 			</ul>
@@ -34,8 +44,7 @@
 			<ul class='portfolio-items' id="grid">
 				<li class="items" *ngFor="let item of portfolio.project;let i = index" data-aos="fade-up"
 					attr.data-groups='"[{{item.group}}]"'>
-					<div class='inner'>
-						<img [src]='item.image'>
+					<div class='inner' [style.background-image]="'url(' + item.image + ')'">
 						<div class='overlay'>
 							<div class="m-auto text-center overlay-btn-group">
 								<button type="button" class="btn-color mb-2" (click)="openPopup(i)">view</button>
@@ -59,13 +68,14 @@
               <input class="form-control" type="text" name='link' placeholder="Url Link" ngModel required>
             </div>
             <div class="col-md-6 form-group">
-              <input class="form-control" type="text" name='youtube' placeholder="Fork Link" ngModel required>
+              <input class="form-control" type="text" name='git' placeholder="Fork Link" ngModel required>
            </div>
           <div class="col-md-6 form-group">
             <input class="form-control" type="text" name='group' placeholder="Group Comma Separated" ngModel required>
           </div>
           <div class="col-md-6 form-group">
-            <input class="form-control" type="text" name="image" (click)="openUploader()" placeholder="Click to upload Image" ngModel>
+						<input class="form-control" type="text" name="image" (click)="openUploader()" placeholder="Click to upload Image" [(ngModel)]="project.value.image" required>
+						<input class="form-control" type="text" name="public_id" placeholder="Click to upload Image" [(ngModel)]="project.value.public_id" hidden>
             <input class="form-control-file" type="file" id="uploader" (change)="upload($event,project)" hidden>
           </div>
           <div class="col-12 form-group">

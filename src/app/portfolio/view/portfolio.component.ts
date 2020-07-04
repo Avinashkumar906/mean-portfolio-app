@@ -19,7 +19,6 @@ export class PortfolioComponent implements OnInit,OnDestroy {
   shuffleInstance:any;
   userSubscription:Subscription;
   shuffleInit : Boolean = false;
-  response:any = {image: '', public_id: ''}
   portfolio:any = this.userService.getPortfolio();
 
   constructor(
@@ -35,6 +34,7 @@ export class PortfolioComponent implements OnInit,OnDestroy {
     .subscribe(
       (portfolio) => {
         this.portfolio = portfolio;
+        console.log(portfolio)
       },
       (err)=>console.log(err),
     )
@@ -49,25 +49,17 @@ export class PortfolioComponent implements OnInit,OnDestroy {
       formData.append('file', event.target.files[0], event.target.files[0].name)
       this.httpService.postImageData(formData).subscribe(
         (response:any)=>{
-          this.response.image = response.secure_url
-          this.response.public_id = response.public_id
+          form.value.image = response.secure_url
+          form.value.public_id = response.public_id
         },
         (err)=>console.log(err)
       )
     }
   }
   submit(form:NgForm){
-    console.log
-    if(form.value.image || (this.response.image !== '' && this.response.public_id !== '')){
       form.value.group = form.value.group.split(',')
-      form.value.image = form.value.image ? form.value.image : this.response.image;
-      form.value.public_id = form.value.image ? '' : this.response.public_id;
       this.portfolio.project.push(form.value)
-      this.response = { image:'', public_id:'' }
       form.reset()
-    } else {
-      alert('Please Upload a Project Image or Paste Image Url')
-    }
   }
 
   initShuffle(){

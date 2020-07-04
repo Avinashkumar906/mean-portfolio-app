@@ -1,27 +1,22 @@
 <ngx-smart-modal #myModal identifier="myModal" [closable]="false">
-    <!--project popup-->
-    <div class='popup-box' *ngIf='myModal.hasData()'>
+    <div class='popup-box' style="background: #F0F0F0"  *ngIf='myModal.hasData()' >
         <figure>
-
-            <!--project popup image-->
-            <img [src]='myModal.getData().image'>
-
+            <img [src]='myModal.getData().image' width="100%">
         </figure>
-        <div class='content'>
-
-            <!-- project popup title -->
-            <h4 class="h4">{{myModal.getData().title | json}}</h4>
-
-            <!--project popup description-->
+        <div class='content m-4'>
+            <h4 class="h4">{{myModal.getData().title}}</h4>
             <p class="p text-justify text-muted em">
-                {{myModal.getData().description | json}}
+                {{myModal.getData().description}}
             </p>
-            <div class="text-center">
-                <button class="btn-custom btn-color" (click)="myModal.removeData();myModal.close()">Close</button>
+            <p class="p text-muted em">GIT: {{myModal.getData().git}}</p>
+            <div class="d-flex justify-content-end py-2">
+                <div class="mx-2">
+                    <a class="btn-custom btn-color" (click)="myModal.removeData();myModal.close()">Close</a>
+                </div>
+                <div class="mx-2">
+                    <a target="_blank" href="{{myModal.getData().link}}" class="btn-custom btn-color">Visit</a>
+                </div>
             </div>
         </div>
-
-
     </div>
-
 </ngx-smart-modal>

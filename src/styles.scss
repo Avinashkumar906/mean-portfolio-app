@@ -16,10 +16,9 @@
 =======================================================*/
 body, html{
 	height:100vh;
-	width:100vw;
+	width:100%;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
 }
 body{
 	position:relative;
@@ -40,6 +39,9 @@ h1, h2, h3, h4, h5, h6{
 	font-family: 'Raleway', sans-serif;
 	outline: none;
 	letter-spacing: 2px;
+}
+a:hover{
+	text-decoration: none!important;
 }
 .color{
 	color:#303F9F;
@@ -246,13 +248,7 @@ img{
 .intro-text > .intro-btns > .btn-custom{
 	margin:0 15px;
 }
-// .v-align{
-// 	display:table;
-// 	height:100%;
-// 	width:100%;
-// }
 .inner{
-	// height:100%;
 	width:100%;
 }
 
@@ -587,12 +583,14 @@ img{
 		z-index:2;
     padding: 5px;
 		> .inner{
+			height: 250px;
+			width: 100%;
 			margin:0 5px 5px 0;
 			position:relative;
-			img{
-				height: 200px;
-				width: 100%;
-			}
+			background-size: cover;
+			background-position: center;
+    		background-repeat: no-repeat;
+			
 			&:hover > .overlay:before{
 				-webkit-transform:rotate(0deg);
 				-moz-transform:rotate(0deg);
@@ -843,9 +841,13 @@ div:last-of-type > .p-table,
 div:last-of-type > .service{
 	margin-bottom:0;
 }
-//modal css
+//modal css F0F0F0
 .nsm-content {
-    background: #F0F0F0;
+	background: none;
+	box-shadow: none;
+}
+.nsm-dialog{
+	max-width: 80%;
 }
 /*=======================================================
 	Responsive CSS
