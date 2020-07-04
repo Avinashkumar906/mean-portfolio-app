@@ -56,7 +56,7 @@
 			</ul>
 
 			<div class="w-100 project-add-section" *ngIf="isEditMode()">
-				<form #project='ngForm' (ngSubmit)="project.valid && submit(project)" novalidate>
+				<form #project='ngForm' (ngSubmit)="submit(project)" novalidate>
 					<div class="form-row">
 						<div class="col-md-6 form-group">
 							<input class="form-control" type="text" name="name" placeholder="Name" ngModel required>

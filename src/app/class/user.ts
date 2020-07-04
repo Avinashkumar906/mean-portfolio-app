@@ -56,6 +56,7 @@ export class User{
             description:string;
             link:string;
             youtube:string;
+            git:string;
             group:Array<string>
         }>
     }

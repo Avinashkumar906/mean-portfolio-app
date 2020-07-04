@@ -8,10 +8,10 @@
             <p class="p text-justify text-muted em">
                 {{myModal.getData().description}}
             </p>
-            <p class="p text-muted em">GIT: {{myModal.getData().git}}</p>
+            <p class="p text-muted em" style="word-break: break-all;">GIT: {{myModal.getData().git}}</p>
             <div class="d-flex justify-content-end py-2">
                 <div class="mx-2">
-                    <a class="btn-custom btn-color" (click)="myModal.removeData();myModal.close()">Close</a>
+                    <a class="btn-custom btn-color" (click)="myModal.close()">Close</a>
                 </div>
                 <div class="mx-2">
                     <a target="_blank" href="{{myModal.getData().link}}" class="btn-custom btn-color">Visit</a>

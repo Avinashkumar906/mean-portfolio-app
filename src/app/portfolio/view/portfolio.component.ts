@@ -73,6 +73,7 @@ export class PortfolioComponent implements OnInit,OnDestroy {
   }
 
   openPopup(i:number){
+    this.modalService.resetModalData('myModal')
     this.modalService.setModalData( this.portfolio.project[i],'myModal')
     this.modalService.open('myModal');
   }
