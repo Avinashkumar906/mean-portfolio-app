@@ -57,6 +57,7 @@
 
 			<div class="w-100 project-add-section" *ngIf="isEditMode()">
 				<form #project='ngForm' (ngSubmit)="submit(project)" novalidate>
+					<input class="form-control-file" type="file" #uploader (change)="upload($event)" hidden>
 					<div class="form-row">
 						<div class="col-md-6 form-group">
 							<input class="form-control" type="text" name="name" placeholder="Name" ngModel required>
@@ -65,18 +66,23 @@
               <input class="form-control" type="text" name='title' placeholder="Title" ngModel required>
             </div>
             <div class="col-md-6 form-group">
-              <input class="form-control" type="text" name='link' placeholder="Url Link" ngModel required>
+              <input class="form-control" type="text" name='link' placeholder="Url Link" ngModel >
             </div>
             <div class="col-md-6 form-group">
-              <input class="form-control" type="text" name='git' placeholder="Fork Link" ngModel required>
+              <input class="form-control" type="text" name='git' placeholder="Fork Link" ngModel >
            </div>
           <div class="col-md-6 form-group">
-            <input class="form-control" type="text" name='group' placeholder="Group Comma Separated" ngModel required>
+            <input class="form-control" type="text" name='group' placeholder="Group Comma Separated" ngModel >
           </div>
-          <div class="col-md-6 form-group">
-						<input class="form-control" type="text" name="image" (click)="openUploader()" placeholder="Click to upload Image" [(ngModel)]="project.value.image" required>
-						<input class="form-control" type="text" name="public_id" placeholder="Click to upload Image" [(ngModel)]="project.value.public_id" hidden>
-            <input class="form-control-file" type="file" id="uploader" (change)="upload($event,project)" hidden>
+					<div class="col-md-6 form-group">
+            <input class="form-control" type="text" name='youtube' placeholder="Video Link" ngModel >
+          </div>
+          <div class="col-md-12 form-group">
+					  <div *ngIf="!selectedFile">
+							<input  class="form-control" type="text" name="image" placeholder="Paste image URL" ngModel>
+						</div>
+						<span class="h6 mt-2 d-block text-center" *ngIf="!project.value.image && !selectedFile">OR</span>
+						<span *ngIf="!project.value.image" class="h5 mt-0 d-block text-center" style="cursor:pointer;" (click)="uploader.click()">{{!selectedFile ? "click to upload Image" : selectedFile.name +" OR click to change"}}</span>
           </div>
           <div class="col-12 form-group">
             <textarea class="form-control" rows="2" name="description" placeholder="Description" ngModel required></textarea>

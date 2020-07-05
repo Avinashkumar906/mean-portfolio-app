@@ -24,7 +24,6 @@ export class HttpserviceService {
         this.spinner.hide()
       },
       (error) =>{
-        console.log(error)
         this.spinner.hide()
       }
     )
@@ -52,6 +51,7 @@ export class HttpserviceService {
     return this.http.post('https://api4asquare.herokuapp.com/postmailtoadmin', maildata)
   }
   postImageData(data){
+    this.spinner.show();
     const headers = new HttpHeaders().set('InterceptorSkipHeader', '');
     return this.http.post('https://api4asquare.herokuapp.com/uploadimage', data, { headers })
   }

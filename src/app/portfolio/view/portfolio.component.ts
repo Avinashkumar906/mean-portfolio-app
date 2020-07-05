@@ -17,6 +17,7 @@ import { AuthService } from 'src/app/service/auth.service';
 export class PortfolioComponent implements OnInit,OnDestroy {
 
   shuffleInstance:any;
+  selectedFile:File = null;
   userSubscription:Subscription;
   shuffleInit : Boolean = false;
   portfolio:any = this.userService.getPortfolio();
@@ -25,7 +26,8 @@ export class PortfolioComponent implements OnInit,OnDestroy {
     private modalService:NgxSmartModalService,
     private userService: UserserviceService,
     private httpService: HttpserviceService,
-    private authService: AuthService
+    private authService: AuthService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -39,27 +41,36 @@ export class PortfolioComponent implements OnInit,OnDestroy {
       (err)=>console.log(err),
     )
   }
-  openUploader(){
-    document.getElementById('uploader').click();
-  }
 
-  upload(event,form){
+  upload(event){
     if (event.target.files.length > 0) {
-      var formData = new FormData();
-      formData.append('file', event.target.files[0], event.target.files[0].name)
-      this.httpService.postImageData(formData).subscribe(
-        (response:any)=>{
-          form.value.image = response.secure_url
-          form.value.public_id = response.public_id
-        },
-        (err)=>console.log(err)
-      )
+      this.selectedFile = <File>event.target.files[0];
     }
   }
   submit(form:NgForm){
-      form.value.group = form.value.group.split(',')
-      this.portfolio.project.push(form.value)
-      form.reset()
+    if(this.selectedFile != null){
+      var formData = new FormData();
+      formData.append('file', this.selectedFile, this.selectedFile.name)
+      this.httpService.postImageData(formData).subscribe(
+        (response:any)=>{
+          form.value.group = form.value.group ? form.value.group.split(',') : ['demo'];
+          form.value.image = response.secure_url
+          form.value.public_id = response.public_id
+          this.portfolio.project.push(form.value)
+          this.selectedFile = null;
+          form.reset();
+          this.spinner.hide()
+        },
+        (err)=>{this.spinner.hide();alert("error while uploading!");console.log(err);}
+      )
+      } else if (form.value.image != null){
+        form.value.group = form.value.group ? form.value.group.split(',') : ['demo'];
+        this.portfolio.project.push(form.value)
+        form.reset();
+      }
+      else{
+        alert('Select an image or paste Url.')
+      }    
   }
 
   initShuffle(){
@@ -83,12 +94,13 @@ export class PortfolioComponent implements OnInit,OnDestroy {
   }
 
   savePortfolioData(){
-  this.httpService.postUserPortfolioSection().subscribe(
-      data=>{
-        alert('Updated Successfully!')
-      },
-      err=>alert('Server Error!')
-    )
+    this.spinner.show()
+    this.httpService.postUserPortfolioSection().subscribe(
+        data=>{
+          this.spinner.hide();
+        },
+        err=>{this.spinner.hide();alert('Server Error!')}
+      )
   }
 
   portfolioFilter(event){

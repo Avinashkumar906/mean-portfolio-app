@@ -1,5 +1,5 @@
 <ngx-smart-modal #myModal identifier="myModal" [closable]="false">
-    <div class='popup-box' style="background: #F0F0F0"  *ngIf='myModal.hasData()' >
+    <div class='popup-box' style="background: #F0F0F0; max-width:1020px; width:95%;"  *ngIf='myModal.hasData()' >
         <figure>
             <img [src]='myModal.getData().image' width="100%">
         </figure>
