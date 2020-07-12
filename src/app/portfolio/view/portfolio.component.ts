@@ -51,7 +51,7 @@ export class PortfolioComponent implements OnInit,OnDestroy {
     if(this.selectedFile != null){
       var formData = new FormData();
       formData.append('file', this.selectedFile, this.selectedFile.name)
-      this.httpService.postImageData(formData).subscribe(
+      this.httpService.postImageDataV2(formData).subscribe(
         (response:any)=>{
           form.value.group = form.value.group ? form.value.group.split(',') : ['demo'];
           form.value.image = response.secure_url

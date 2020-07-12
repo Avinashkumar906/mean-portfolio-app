@@ -55,5 +55,9 @@ export class HttpserviceService {
     const headers = new HttpHeaders().set('InterceptorSkipHeader', '');
     return this.http.post('https://api4asquare.herokuapp.com/uploadimage', data, { headers })
   }
+  postImageDataV2(data){
+    this.spinner.show();
+    return this.http.post('https://api4asquare.herokuapp.com/uploadimagev2', data)
+  }
 
 }
