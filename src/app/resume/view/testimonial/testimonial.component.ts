@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
+import { ArrayOperationService } from 'src/app/service/array-operation.service';
 
 @Component({
   selector: 'app-testimonial',
@@ -14,7 +15,8 @@ export class TestimonialComponent implements OnInit {
     saying:string;
   }>;
   constructor(
-    private authService:AuthService
+    private authService:AuthService,
+    private arrayService:ArrayOperationService
   ) { }
 
   ngOnInit() {
@@ -28,20 +30,35 @@ export class TestimonialComponent implements OnInit {
     responsive: {
       0: {
         items: 1,
-        loop: true
+        loop: false
       },
       768: {
         items: 2,
-        loop: true
+        loop: false
       },
       1500: {
         items: 3,
         nav: true,
-        loop: true
+        loop: false
       }
     }
   }
 
+  moveUp(index:number){
+    if(this.arrayService.moveUp(this.testimonial,index)){
+      // focus code
+    }else{
+      // focus code
+    }
+  }
+
+  moveDown(index:number){
+    if(this.arrayService.moveDown(this.testimonial,index)){
+      // focus code
+    }else{
+      // focus code
+    }
+  }
   removeComment(i:number){
     this.testimonial.splice(i,1)
   }

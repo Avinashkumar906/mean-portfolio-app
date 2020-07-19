@@ -24,9 +24,11 @@
                       <button class='btn-color m-1'>
                           Choose This
                       </button>
-                      <button *ngIf="isEditMode()" class='btn-color m-1' (click)="removePricing(j)">
-                          Remove
-                      </button>
+                      <div class="w-100 text-center" *ngIf="isEditMode()">
+                        <button type="button" class="btn-color m-1" (click)="moveUp(j)"><i class='fas fa-arrow-up'></i></button>
+                        <button type="button" class="btn-color m-1" (click)="moveDown(j)"><i class='fas fa-arrow-down'></i></button>
+                        <button type="button" class="btn-color m-1" (click)="removePricing(j)"><i class='fas fa-times'></i></button>
+                      </div>
                     </div>
                 </div>
             </div>

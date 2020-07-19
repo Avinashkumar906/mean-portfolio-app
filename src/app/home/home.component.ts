@@ -51,4 +51,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   toggleEdit(){
     this.authService.toggleEditmaode();
   }
+  isAuthenticated():boolean{
+    return this.authService.isAuthenticated()
+  }
 }

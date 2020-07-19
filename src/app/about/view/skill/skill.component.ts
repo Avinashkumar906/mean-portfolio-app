@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { NgForm } from '@angular/forms';
+import { ArrayOperationService } from 'src/app/service/array-operation.service';
 
 @Component({
   selector: 'app-skill',
@@ -15,10 +16,27 @@ export class SkillComponent implements OnInit {
   }>
 
   constructor(
-    private authService:AuthService
+    private authService:AuthService,
+    private arrayService : ArrayOperationService,
   ) { }
 
   ngOnInit() {
+  }
+
+  moveUp(index:number){
+    if(this.arrayService.moveUp(this.skills,index)){
+      // focus code
+    }else{
+      // focus code
+    }
+  }
+
+  moveDown(index:number){
+    if(this.arrayService.moveDown(this.skills,index)){
+      // focus code
+    }else{
+      // focus code
+    }
   }
 
   onSubmit(form:NgForm){

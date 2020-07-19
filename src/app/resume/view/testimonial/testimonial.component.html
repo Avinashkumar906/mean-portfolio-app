@@ -6,22 +6,26 @@
             </h2>
         </div>
         <owl-carousel [options]="carouselOptions" [items]="testimonial" [carouselClasses]="['owl-theme', 'sliding']">
-            <div class="item" *ngFor="let item of testimonial;let i= index" data-aos="fade-in">
-                <div class='testimonial'>
-                    <div class='icon'>
-                        <i class='fas fa-quote-left'></i>
+            <div class="testimonial" *ngFor="let item of testimonial;let i= index" data-aos="fade-in">
+                <!-- <div class=''> -->
+                    <div>
+                        <div class='icon'>
+                            <i class='fas fa-quote-left'></i>
+                        </div>
+                        <p class="p text-justify">
+                            {{item.saying}}
+                        </p>
                     </div>
-                    <p class="p text-justify">
-                        {{item.saying}}
-                    </p>
                     <div class='author'>
                         <h4 class="h4">{{item.clientName}}</h4>
                         <span>{{item.position}} at {{item.company}}</span>
+                        <div class="text-center mt-2" *ngIf="isEditMode()">
+                            <button type="button" class="btn-color m-1" (click)="moveUp(i)"><i class='fas fa-arrow-up'></i></button>
+                            <button type="button" class="btn-color m-1" (click)="moveDown(i)"><i class='fas fa-arrow-down'></i></button>
+                            <button type="button" class="btn-color m-1" (click)="removeComment(i)"><i class='fas fa-times'></i></button>
+                        </div>
                     </div>
-                    <div class="text-center mt-2" *ngIf="isEditMode()">
-                      <button class="btn-color mr-auto" (click)="removeComment(i)">remove</button>
-                    </div>
-                </div>
+                <!-- </div> -->
             </div>
         </owl-carousel>
     </div>

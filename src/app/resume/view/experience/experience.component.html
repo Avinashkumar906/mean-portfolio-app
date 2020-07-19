@@ -18,7 +18,9 @@
                         {{exp.description}}
                     </p>
                     <div class="text-center mt-2" *ngIf="isEditMode()">
-                      <button class="btn-color" (click)="removeEducation(i)">remove</button>
+                        <button type="button" class="btn-color m-1" (click)="moveUp(i)"><i class='fas fa-arrow-up'></i></button>
+                        <button type="button" class="btn-color m-1" (click)="moveDown(i)"><i class='fas fa-arrow-down'></i></button>
+                        <button type="button" class="btn-color m-1" (click)="removeEducation(i)"><i class='fas fa-times'></i></button>
                   </div>
                 </div>
             </li>

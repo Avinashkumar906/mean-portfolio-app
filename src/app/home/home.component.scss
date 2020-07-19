@@ -1,3 +1,22 @@
 .highlight {
     color: #a0a5c5;
 }
+.highlight-edit{
+    color: #a0a5c5;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #a0a5c5 ;
+    background: transparent;
+    cursor: text;
+}
+.intro-text{
+    .p-edit{
+        border: none;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        border-bottom: 2px solid #fff ;
+        background: transparent;
+        cursor: text;
+    }
+}

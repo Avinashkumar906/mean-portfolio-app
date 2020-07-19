@@ -1,67 +1,73 @@
 <div class='section-block timeline-block'>
-    <div class='container-fluid'>
-        <div class='section-header'>
-            <h2 class="h2" data-aos="fade-right">My
-                <strong class='color'>Education</strong>
-            </h2>
-        </div>
-
-        <ul class='timeline' *ngIf="education; else noData">
-            <li *ngFor='let edu of education; let i = index' data-aos="fade-up">
-                <div class='timeline-content'>
-                    <h4>{{edu.college}}</h4>
-                    <em>
-                        <span>{{edu.title}},</span>
-                        <span>{{edu.date}}</span>
-                    </em>
-                    <p>
-                        {{edu.description}}
-                    </p>
-                  <div class="text-center mt-2" *ngIf="isEditMode()">
-                    <button class="btn-color" (click)="removeEducation(i)">remove</button>
-                  </div>
-                </div>
-            </li>
-            <li data-aos="fade-up" *ngIf="isEditMode()">
-                <div class='timeline-content'>
-                  <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit(form)" novalidate>
-                    <div class="form-row">
-                      <div class="form-group col-12">
-                        <input class="form-control" name="college" type="text" placeholder="School Name" ngModel required minlength="5">
-                      </div>
-                      <div class="form-group col-6">
-                          <input class="form-control" name="title" type="text" placeholder="Title" ngModel required minlength="5">
-                      </div>
-                      <div class="form-group col-6">
-                          <input class="form-control" name="date" type="text" placeholder="Date" ngModel required>
-                      </div>
-                      <div class="col-12">
-                        <textarea class="form-control" name="description" rows="2" placeholder="Description" ngModel required minlength="10"></textarea>
-                      </div>
-                      <div class="col-12">
-                        <div class="text-center mt-2">
-                          <button type="submit" class="btn-color mr-2" [disabled]="!form.form.valid">add</button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-            </li>
-        </ul>
-        <ng-template #noData>
-            <!-- *ngIf="pricing;else noData" -->
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="text-center">
-                        <h2 class="h2">
-                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;">
-                                add Education
-                            </a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
+  <div class='container-fluid'>
+    <div class='section-header'>
+      <h2 class="h2" data-aos="fade-right">My
+        <strong class='color'>Education</strong>
+      </h2>
     </div>
+
+    <ul class='timeline' *ngIf="education; else noData">
+      <li *ngFor='let edu of education; let i = index' data-aos="fade-up">
+        <div class='timeline-content'>
+          <h4>{{edu.college}}</h4>
+          <em>
+            <span>{{edu.title}},</span>
+            <span>{{edu.date}}</span>
+          </em>
+          <p>
+            {{edu.description}}
+          </p>
+          <div class="text-center mt-2" *ngIf="isEditMode()">
+            <button type="button" class="btn-color m-1" (click)="moveUp(i)"><i class='fas fa-arrow-up'></i></button>
+            <button type="button" class="btn-color m-1" (click)="moveDown(i)"><i class='fas fa-arrow-down'></i></button>
+            <button type="button" class="btn-color m-1" (click)="removeEducation(i)"><i
+                class='fas fa-times'></i></button>
+
+          </div>
+        </div>
+      </li>
+      <li data-aos="fade-up" *ngIf="isEditMode()">
+        <div class='timeline-content'>
+          <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit(form)" novalidate>
+            <div class="form-row">
+              <div class="form-group col-12">
+                <input class="form-control" name="college" type="text" placeholder="School Name" ngModel required
+                  minlength="5">
+              </div>
+              <div class="form-group col-6">
+                <input class="form-control" name="title" type="text" placeholder="Title" ngModel required minlength="5">
+              </div>
+              <div class="form-group col-6">
+                <input class="form-control" name="date" type="text" placeholder="Date" ngModel required>
+              </div>
+              <div class="col-12">
+                <textarea class="form-control" name="description" rows="2" placeholder="Description" ngModel required
+                  minlength="10"></textarea>
+              </div>
+              <div class="col-12">
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn-color mr-2" [disabled]="!form.form.valid">add</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+    <ng-template #noData>
+      <!-- *ngIf="pricing;else noData" -->
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="text-center">
+            <h2 class="h2">
+              <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;">
+                add Education
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 
 </div>

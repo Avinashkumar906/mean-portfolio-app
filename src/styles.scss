@@ -246,6 +246,7 @@ img{
 	margin-top:45px;
 }
 .intro-text > .intro-btns > .btn-custom{
+	color: #FFF;
 	margin:0 15px;
 }
 .inner{
@@ -303,39 +304,44 @@ img{
 }
 .service{
 	text-align: center;
-  // padding-bottom: 20px;
-	> .service-btn{
-    text-align: center;
-    position: relative;
-    margin: 10px 0;
-  }
-}
-.service > .icon{
-	font-size:54px;
-	position:relative;
-	z-index:5;
+	height:100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	 .icon{
+		position:relative;
+		width: 100%;
+		font-size:54px;
+		z-index:5;
+	}
+	 .content{
+		position:relative;
+		z-index:5;
+		width: 100%;
+		> h4{
+			color:#202020;
+			letter-spacing:2px;
+			text-transform:uppercase;
+			margin:25px 0;
+		}
+		> p{
+			text-align: center;
+			line-height:1.6em;
+			color:rgba(0,0,0,.4);
+			margin:0;
+			padding: 0;
+		}
+	}
+	 .service-btn{
+		text-align: center;
+		margin: 10px 0;
+		bottom: 0;
+  	}
 }
 .service > .icon > i:before{
 	font-size:54px;
 	vertical-align:middle;
 	color:#303F9F;
-}
-.service > .content{
-	position:relative;
-	z-index:5;
-}
-.service > .content > h4{
-	color:#202020;
-	letter-spacing:2px;
-	text-transform:uppercase;
-	margin:25px 0;
-}
-.service > .content > p{
-	text-align: center;
-	line-height:1.6em;
-	color:rgba(0,0,0,.4);
-	margin:0;
-	padding: 0;
 }
 .skills-block .section-header{
 	position: relative;
@@ -505,37 +511,46 @@ img{
 	position: relative;
 	margin-bottom:80px;
 }
-.testimonial{
-	position:relative;
-}
-.testimonial > .icon{
-	font-size:64px;
-	color:#303F9F;
-	opacity:.6;
-}
-.testimonial > p{
-	font-size:18px;
-	line-height:1.8em;
-	color:rgba(0,0,0,.6);
-	font-style:italic;
-	margin-top:10px;
-}
-.testimonial > .author{
-	margin-top:25px;
-}
-.testimonial > .author > h4{
-	margin:0;
-	text-transform:uppercase;
-	letter-spacing:2px;
-	margin-bottom:5px;
-}
-.testimonial > .author > span{
-	font-style:italic;
-	color:rgba(0,0,0,.6);
+
+.owl-carousel .owl-stage {
+    display: flex;
 }
 
-
-
+.owl-carousel .owl-item .testimonial{
+    width: auto;
+	height: 100%;
+	display: flex;
+    margin: 15px;
+	box-sizing: border-box;
+	flex-direction: column;
+	justify-content: space-between;
+	.icon{
+		font-size:64px;
+		color:#303F9F;
+		opacity:.6;
+	}
+	p{
+		font-size:18px;
+		line-height:1.8em;
+		color:rgba(0,0,0,.6);
+		font-style:italic;
+		margin-top:10px;
+	}
+	.author{
+		margin-bottom:25px;
+		margin-top: 10px;
+		h4{
+			margin:0;
+			text-transform:uppercase;
+			letter-spacing:2px;
+			margin-bottom:5px;
+		}
+		span{
+			font-style:italic;
+			color:rgba(0,0,0,.6);
+		}	
+	}
+}
 /*=======================================================
 	Portfolio Section
 =======================================================*/
@@ -734,8 +749,8 @@ img{
 	button css
 =======================================================*/
 .btn-custom{
-	color:#FFF;
-	cursor:pointer;
+	color:#FFF!important;
+	cursor:pointer!important;
 	letter-spacing:4px;
 	text-transform:uppercase;
 	text-decoration:none!important;

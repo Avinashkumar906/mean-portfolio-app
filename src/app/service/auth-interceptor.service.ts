@@ -10,18 +10,13 @@ export class AuthInterceptorService implements HttpInterceptor{
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
-    if (req.headers.has('InterceptorSkipHeader')) {
-      const headers = req.headers.delete('InterceptorSkipHeader');
-      return next.handle(req.clone({ headers }));
-    } else if(localStorage.getItem('token')) {
-      let header = req.headers
-      header.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-      header.append('Access-Control-Allow-Origin', '*');
+    if(localStorage.getItem('token')) {
       return next.handle(
-        req.clone({headers:header})
+        req.clone({
+          headers:req.headers.append('Authorization', `Bearer ${localStorage.getItem('token')}`),
+        })
       );
-
     } else 
-    return next.handle(req);
+      return next.handle(req);
   }
 }

@@ -8,6 +8,7 @@ import Shuffle from 'shufflejs';
 import { HttpserviceService } from 'src/app/service/httpservice.service';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
+import { ArrayOperationService } from 'src/app/service/array-operation.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -27,7 +28,8 @@ export class PortfolioComponent implements OnInit,OnDestroy {
     private userService: UserserviceService,
     private httpService: HttpserviceService,
     private authService: AuthService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private arrayService:ArrayOperationService
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,23 @@ export class PortfolioComponent implements OnInit,OnDestroy {
       this.selectedFile = <File>event.target.files[0];
     }
   }
+
+  moveUp(index:number){
+    if(this.arrayService.moveUp(this.portfolio.project,index)){
+      // focus code
+    }else{
+      // focus code
+    }
+  }
+
+  moveDown(index:number){
+    if(this.arrayService.moveDown(this.portfolio.project,index)){
+      // focus code
+    }else{
+      // focus code
+    }
+  }
+
   submit(form:NgForm){
     if(this.selectedFile != null){
       var formData = new FormData();

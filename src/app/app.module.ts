@@ -15,6 +15,7 @@ import { UserserviceService } from './service/userservice.service'
 import { HttpserviceService } from './service/httpservice.service';
 import { AuthService } from './service/auth.service';
 import { AuthInterceptorService } from './service/auth-interceptor.service';
+import {ArrayOperationService} from './service/array-operation.service'
 
 //default components to be loaded at app startup
 import { HomeComponent } from './home/home.component';
@@ -43,7 +44,7 @@ import { NavbarMenuComponent } from './navbar/navbar-menu/navbar-menu.component'
     ReactiveFormsModule,
     NgxSmartModalModule.forRoot()
   ],
-  providers: [ UserserviceService, HttpserviceService, AuthService, 
+  providers: [ UserserviceService, HttpserviceService, AuthService, ArrayOperationService, 
     {provide:HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]

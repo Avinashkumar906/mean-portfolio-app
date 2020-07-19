@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
+import { ArrayOperationService } from 'src/app/service/array-operation.service';
 
 @Component({
   selector: 'app-experience',
@@ -15,10 +16,27 @@ export class ExperienceComponent implements OnInit {
     description: string;
   }>
   constructor(
-    private authService:AuthService
+    private authService:AuthService,
+    private arrayService:ArrayOperationService
   ) { }
 
   ngOnInit() {
+  }
+
+  moveUp(index:number){
+    if(this.arrayService.moveUp(this.experience,index)){
+        // focus code
+    }else{
+        // focus code
+    }
+  }
+
+  moveDown(index:number){
+    if(this.arrayService.moveDown(this.experience,index)){
+        // focus code
+    }else{
+        // focus code
+    }
   }
   removeEducation(i: number) {
     this.experience.splice(i, 1)

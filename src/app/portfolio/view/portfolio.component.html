@@ -48,7 +48,11 @@
 						<div class='overlay'>
 							<div class="m-auto text-center overlay-btn-group">
 								<button type="button" class="btn-color mb-2" (click)="openPopup(i)">view</button>
-								<button *ngIf="isEditMode()" type="button" class="btn-color" (click)="removeProject(i)">delete</button>
+								<div class="w-100 service-btn" *ngIf="isEditMode()">
+									<button type="button" class="btn-color m-1" (click)="moveUp(i)"><i class='fas fa-arrow-up'></i></button>
+									<button type="button" class="btn-color m-1" (click)="moveDown(i)"><i class='fas fa-arrow-down'></i></button>
+									<button type="button" class="btn-color m-1" (click)="removeProject(i)"><i class='fas fa-times'></i></button>
+								</div>
 							</div>
 						</div>
 					</div>
