@@ -44,7 +44,7 @@
 			<ul class='portfolio-items' id="grid">
 				<li class="items" *ngFor="let item of portfolio.project;let i = index" data-aos="fade-up"
 					attr.data-groups='"[{{item.group}}]"'>
-					<div class='inner' [style.background-image]="'url(' + item.image + ')'">
+					<div class='inner portfolio' [style.background-image]="'url(' + item.image + ')'">
 						<div class='overlay'>
 							<div class="m-auto text-center overlay-btn-group">
 								<button type="button" class="btn-color mb-2" (click)="openPopup(i)">view</button>

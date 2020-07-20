@@ -9,12 +9,14 @@ export class ArrayOperationService {
 
   moveUp(array,index:number){
     if(index>0){
-      let temp = array[index-1];
-      array[index-1] = array[index]
-      array[index] = temp;
+      setTimeout(() => {
+        let temp = array[index-1];
+        array[index-1] = array[index]
+        array[index] = temp;  
+      }, 250);
       return true;
     } else {
-      alert("already on top!")
+      // alert("already on top!")
       return false;
     }
   }
@@ -26,7 +28,7 @@ export class ArrayOperationService {
       array[index] = temp;
       return true;
     } else {
-      alert("already on Bottom!")
+      // alert("already on Bottom!")
       return false;
     }
   }

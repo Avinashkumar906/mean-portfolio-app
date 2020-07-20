@@ -6,7 +6,7 @@
 
         <div class='row' *ngIf="pricing;else noData">
             <div class='col-md-4 p-2' data-aos="flip-left" *ngFor='let price of pricing;let j = index'>
-                <div class='p-table m-auto' >
+                <div class='p-table m-auto pricing' >
                     <div class='header' >
                         <h4 class="h4">{{price.title}}</h4>
                         <div class='price' >
