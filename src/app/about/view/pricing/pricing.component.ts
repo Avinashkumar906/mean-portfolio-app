@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { ArrayOperationService } from 'src/app/service/array-operation.service';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-pricing',
@@ -50,7 +51,9 @@ export class PricingComponent implements OnInit {
   }
 
   removePricing(index:number){
-    this.pricing.splice(index,1)
+    let element1 = document.querySelectorAll('.pricing')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.pricing.splice(index,1)},250)
   }
 
   onSubmit(form:NgForm){

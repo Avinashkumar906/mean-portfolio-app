@@ -48,8 +48,10 @@ export class ExperienceComponent implements OnInit {
       element1.animate({transform:['translateX(10px)','translateX(-10px)','translateX(0px)']},{duration:500})
     }
   }
-  removeEducation(i: number) {
-    this.experience.splice(i, 1)
+  removeEducation(index: number) {
+    let element1 = document.querySelectorAll('.experience')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.experience.splice(index,1)},250)
   }
 
   onSubmit(form) {

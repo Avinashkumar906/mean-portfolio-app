@@ -69,8 +69,10 @@ export class TestimonialComponent implements OnInit {
       element1.animate({transform:['translateX(10px)','translateX(-10px)','translateX(0px)']},{duration:500})
     }
   }
-  removeComment(i:number){
-    this.testimonial.splice(i,1)
+  removeComment(index:number){
+    let element1 = document.querySelectorAll('.testimonial')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.testimonial.splice(index,1)},250)
   }
   isEditMode(){
     return this.authService.isEditMode()

@@ -119,8 +119,10 @@ export class PortfolioComponent implements OnInit,OnDestroy {
     this.modalService.open('myModal');
   }
 
-  removeProject(i){
-    this.portfolio.project.splice(i,1)
+  removeProject(index:number){
+    let element1 = document.querySelectorAll('.portfolio')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.portfolio.project.splice(index,1)},250)
   }
 
   savePortfolioData(){

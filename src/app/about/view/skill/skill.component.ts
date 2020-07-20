@@ -54,7 +54,9 @@ export class SkillComponent implements OnInit {
   }
 
   removeSkill(index:number){
-    this.skills.splice(index,1);
+    let element1 = document.querySelectorAll('.skill')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.skills.splice(index,1)},250)
   }
 
   isEditMode(){

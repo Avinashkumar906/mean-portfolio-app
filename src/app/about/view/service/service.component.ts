@@ -46,7 +46,9 @@ export class ServiceComponent implements OnInit {
     }
   }
   removeService(index:number){
-    this.services.splice(index,1)
+    let element1 = document.querySelectorAll('.service')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.services.splice(index,1)},250)
   }
   onSubmit(form:NgForm){
     this.services.push(form.value)

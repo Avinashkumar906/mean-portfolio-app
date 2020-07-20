@@ -49,8 +49,10 @@ export class EducationComponent implements OnInit {
     }
   }
 
-  removeEducation(i:number){
-    this.education.splice(i, 1)
+  removeEducation(index:number){
+    let element1 = document.querySelectorAll('.education')[index];
+    element1.animate({transform:['scale(1,1)','scale(.7,.7)']},{duration:250})
+    setTimeout(()=>{this.education.splice(index,1)},250)
   }
 
   onSubmit(form){
