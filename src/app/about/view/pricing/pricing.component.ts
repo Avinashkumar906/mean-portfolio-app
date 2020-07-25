@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { ArrayOperationService } from 'src/app/service/array-operation.service';
-import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-pricing',

@@ -1,34 +1,36 @@
-<section class='d-flex align-items-center justify-content-center section section-main h-100 w-100' [style.background-image]="bgImageUrl"
+<section class='d-flex align-items-center justify-content-center section section-main h-100 w-100' [style.background-image]="getBackground()"
  style="overflow: hidden;">
 	<div class='inner w-100'>
 		<div class='intro-text' *ngIf="user;else noData" data-aos="fade-in">
 			<h1 class="h1" data-aos="flip-up">
 				<span>Hey, I'm </span>
-				<span *ngIf="!isEditMode();else nameField" class="highlight"> {{ user?.name }}.</span>
-				<ng-template #nameField>
-					<input *ngIf="isEditMode()" class="highlight-edit" type="text" [(ngModel)]="user.name" />
-				</ng-template>
+				<span class="highlight"> {{ user?.name }}.</span>
 			</h1>
-			<p *ngIf="!isEditMode();else bioField" class="p" data-aos="flip-down">{{user?.bio}}</p>
-			<ng-template #bioField>
-				<p>
-					<input *ngIf="isEditMode()" class="p-edit" type="text" [(ngModel)]="user.bio" />
-				</p>
-			</ng-template>
+			<p class="p" data-aos="flip-down">{{user?.bio}}</p>
 			<div *ngIf="!isAuthenticated()" class='intro-btns'>
-				<a [routerLink]="['/about']" data-aos="fade-right" class='btn-custom' style="text-decoration: none;">
+				<a [routerLink]="['/about']" data-aos="fade-right" class='btn-custom'>
 					Discover More
 				</a>
-				<a [routerLink]="['/contact']" data-aos="fade-left" class='btn-custom' style="text-decoration: none;">
+				<a [routerLink]="['/contact']" data-aos="fade-left" class='btn-custom'>
 					Hire Me
 				</a>
 			</div>
 			<div *ngIf="isAuthenticated()" class='intro-btns'>
-				<a data-aos="fade-right" class='btn-custom' (click)="toggleEdit()" style="text-decoration: none;">
+				<div *ngIf="isEditMode()" class="m-auto" style="max-width:500px">
+					<div class="form-group">
+						<input  class="form-control" type="text" [(ngModel)]="user.name" />
+					</div>
+					<div class="form-group">
+						<input  class="form-control" type="text" [(ngModel)]="user.bio" />
+					</div>
+					<div class="form-group">
+						<input  class="form-control" type="text" [(ngModel)]="user.image" />
+					</div>
+				</div>
+				<a data-aos="fade-right" class='btn-custom' (click)="toggleEdit()">
 					Edit
 				</a>
-				<!-- <a class='btn-custom text-light' style="text-decoration: none;">Save</a> -->
-				<a data-aos="fade-left" class='btn-custom' (click)="saveToServer()"  style="text-decoration: none;">
+				<a data-aos="fade-left" class='btn-custom' (click)="saveToServer()">
 					Save
 				</a>
 			</div>

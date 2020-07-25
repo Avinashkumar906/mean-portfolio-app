@@ -48,10 +48,10 @@
 			</div>
 			<div class="col">
 				<div class='about-btns text-center'>
-					<a class='btn-color' data-aos="fade-right">
+					<a (click)="downloadResume()" class='btn-color' data-aos="fade-right">
 						Download Resume
 					</a>
-					<a class='btn-color' data-aos="fade-left">
+					<a [routerLink]="['/contact']" class='btn-color' data-aos="fade-left">
 						Hire Me
 					</a>
 				</div>
