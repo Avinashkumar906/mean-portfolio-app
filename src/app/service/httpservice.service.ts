@@ -54,7 +54,7 @@ export class HttpserviceService {
     return this.http.post(`${environment.apiHostName}/userportfolio`, data)
   }
   postMail(maildata:any){
-    return this.http.post(`${environment.apiHostName}/mail`, maildata)
+    return this.http.post(`${environment.apiHostName}/mailservice`, maildata)
   }
   postImageDataV2(data){
     return this.http.post(`${environment.apiHostName}/uploadimagev2`, data)

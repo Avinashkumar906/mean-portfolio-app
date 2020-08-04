@@ -40,20 +40,21 @@ export class ContactComponent implements OnInit {
   }
   onSubmit(){
     this.spinner.show()
-    this.httpService.postMail(this.form.value).subscribe(
+    let data = new Object({
+      to: "avinashkumar906@gmail.com",
+      from: this.form.value.email,
+      subject: `${this.form.value.subject} | Ngx5Template`,
+      html: ` <h2>Hi Sandy,</h2><br/><h2>${this.form.value.message}</h2><br/><h4>Regards,</h4><h4>${this.form.value.name}</h4>`,
+    })
+    this.httpService.postMail(data).subscribe(
       (response)=>{
-        if(response[0].statusCode === 202){
           this.form.resetForm()
           alert('Mail send!')
           this.spinner.hide()
-        } else {
-          this.spinner.hide()
-          alert('unable to send mail!')
-          throw new Error('unable to send mail!')
-        }
       },
       (err)=>{
         this.spinner.hide()
+        alert('Error in snding Mail !')
         console.log(err)
       },
     )
