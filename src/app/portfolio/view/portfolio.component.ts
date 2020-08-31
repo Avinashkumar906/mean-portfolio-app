@@ -38,7 +38,6 @@ export class PortfolioComponent implements OnInit,OnDestroy {
     .subscribe(
       (portfolio) => {
         this.portfolio = portfolio;
-        console.log(portfolio)
       },
       (err)=>console.log(err),
     )

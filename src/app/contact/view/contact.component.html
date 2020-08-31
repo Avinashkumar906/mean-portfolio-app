@@ -9,7 +9,7 @@
 			<div class='row' data-aos="fade-up">
 				<div class='col-12'>
 					<div class='contact-form'>
-						<form #f="ngForm" (ngSubmit)="f.valid && onSubmit()">
+						<form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f)">
 							<div id='contact-form-result'></div>
 							<div class='row'>
 								<div class='col-md-6'>
@@ -42,7 +42,7 @@
 								</small>
 							</div>
 							<div class='form-group text-center'>
-								<button type='submit' [disabled]='!f.valid' class='btn-custom btn-color'>
+								<button type='submit' [disabled]='!f.valid' class='btn-color'>
 									Send Message
 								</button>
 							</div>

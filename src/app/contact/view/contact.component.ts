@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class ContactComponent implements OnInit {
 
-  @ViewChild('f',{read: NgForm, static:true}) form;
+  // @ViewChild('f',{read: NgForm, static:true}) form;
   private userSubscription:Subscription;
 
   contact:any = this.userService.getContact() ;
@@ -38,19 +38,19 @@ export class ContactComponent implements OnInit {
       ()=>this.spinner.hide()
     )
   }
-  onSubmit(){
+  onSubmit(form:NgForm){
     this.spinner.show()
     let data = new Object({
       to: "avinashkumar906@gmail.com",
-      from: this.form.value.email,
-      subject: `${this.form.value.subject} | Ngx5Template`,
-      html: ` <h2>Hi Sandy,</h2><br/><h2>${this.form.value.message}</h2><br/><h4>Regards,</h4><h4>${this.form.value.name}</h4>`,
+      from: form.value.email,
+      subject: `${form.value.subject} | Ngx5Template`,
+      html: ` <h2>Hi Sandy,</h2><br/><h2>${form.value.message}</h2><br/><h4>Regards,</h4><h4>${form.value.name}</h4>`,
     })
     this.httpService.postMail(data).subscribe(
       (response)=>{
-          this.form.resetForm()
-          alert('Mail send!')
+          form.resetForm()
           this.spinner.hide()
+          alert('Mail send!')
       },
       (err)=>{
         this.spinner.hide()
