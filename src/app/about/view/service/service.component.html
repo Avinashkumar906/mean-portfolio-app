@@ -6,7 +6,7 @@
             </h2>
         </div>
 
-        <div class='row' *ngIf="services && services.length>0;else noData">
+        <div class='row' *ngIf="services">
             <div class='col-sm-6 col-lg-3 p-2' data-aos="flip-left" *ngFor='let service of services;let i = index'>
                 <div class='service'>
                     <div>
@@ -53,21 +53,5 @@
                 </div>
             </div>
         </div>
-
-        <ng-template #noData>
-            <!-- *ngIf="services;else noData" -->
-            <div class="row">
-                <div class="col">
-                    <div class="text-center">
-                        <h2 class="h2">
-                            <a [routerLink]="['edit']" class='btn-custom btn-color' style="text-decoration: none;">
-                                add Skills
-                            </a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-
     </div>
 </div>
