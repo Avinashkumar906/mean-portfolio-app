@@ -453,7 +453,7 @@ img{
 	top:40px;
 	left:0;
 	bottom: 40px;
-	width:2px;
+	width:1.5px;
 	background:#D0D0D0;
 }
 .timeline > li{
@@ -465,7 +465,7 @@ img{
 }
 .timeline > li > .timeline-content{
 	padding:25px;
-	border:solid 1px #B6B6B6;
+	border:solid 1.5px #D0D0D0;
 	position:relative;
 }
 .timeline > li > .timeline-content:before{
@@ -474,8 +474,8 @@ img{
 	top:15px;
 	left:-40px;
 	width:40px;
-	height:1px;
-	background:#B6B6B6;
+	height:1.5px;
+	background:#D0D0D0;
 }
 .timeline > li > .timeline-content:after{
 	content: ' ';
@@ -484,7 +484,7 @@ img{
 	width:16px;
 	transform: rotate(45deg);
 	background:#F0F0F0;
-	border:solid 1px #B6B6B6;
+	border:solid 1.5px #D0D0D0;
 	top:7px;
 	left:-48px;
 }

@@ -1,6 +1,6 @@
 <section id='resume' class='section resume-section border-d'>
 
-	<div *ngIf='resume'>
+	<div *ngIf='resume ; else noData'>
 
 		<app-education [education]='resume && resume?.education ? resume?.education : undefined '></app-education>
 
@@ -14,5 +14,16 @@
     </div>
 
 	</div>
+	<ng-template #noData>
+		<div class="row align-items-center">
+			<div class="col">
+				<div class="text-center">
+					<h2 class="h2">
+						Unable to connect to server!
+					</h2>
+				</div>
+			</div>
+		</div>
+	</ng-template>
 
 </section>

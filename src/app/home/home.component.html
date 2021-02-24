@@ -1,7 +1,7 @@
 <section class='d-flex align-items-center justify-content-center section section-main h-100 w-100' [style.background-image]="getBackground()"
  style="overflow: hidden;">
-	<div class='inner w-100'>
-		<div class='intro-text' *ngIf="user;else noData" data-aos="fade-in">
+	<div class='inner w-100' *ngIf="user ; else noData">
+		<div class='intro-text' data-aos="fade-in">
 			<h1 class="h1" data-aos="flip-up">
 				<span>Hey, I'm </span>
 				<span class="highlight"> {{ user?.name }}.</span>
@@ -35,18 +35,18 @@
 				</a>
 			</div>
 		</div>
-		<ng-template #noData>
-			<div class="intro-text ">
-				<div class="row align-items-center">
-					<div class="col">
-						<div class="text-center text-light">
-							<h2 class="h2">
-								Unable to connect to server!
-							</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		</ng-template>
 	</div>
 </section>
+<ng-template #noData>
+	<section class='section resume-section border-d'>
+		<div class="row align-items-center">
+			<div class="col">
+				<div class="text-center">
+					<h2 class="h2">
+						Unable to connect to server!
+					</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+</ng-template>
