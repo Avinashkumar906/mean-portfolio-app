@@ -7,35 +7,35 @@ import { Subject } from 'rxjs';
 })
 export class UserserviceService {
 
-  constructor() {}
-  user:User;
+  constructor() { }
+  user: User;
   userData = new Subject<User>()
-  
-  getUser(){
+
+  getUser() {
     return this.user;
   }
 
   getAbout(): any {
-    if(this.user)
+    if (this.user)
       return this.user.about;
   }
 
   getResume(): any {
-    if(this.user)
+    if (this.user)
       return this.user.resume;
   }
 
   getPortfolio(): any {
-    if(this.user)
-      return this.user.portfolio;
+    if (this.user)
+      return this.user.project;
   }
 
   getContact(): any {
-    if(this.user)
+    if (this.user)
       return this.user.contact;
   }
 
-  updateUser(user : User){
+  updateUser(user: User) {
     this.user = user;
     this.userData.next(this.user);
   }
