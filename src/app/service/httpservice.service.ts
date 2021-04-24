@@ -11,52 +11,52 @@ import { environment } from 'src/environments/environment'
 export class HttpserviceService {
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private userService:UserserviceService
-  ) {}
+    private userService: UserserviceService
+  ) { }
 
-  getUserData(){
+  getUserData() {
     this.spinner.show();
-    this.http.get(`${environment.apiHostName}/userdata`).subscribe(
-      (data)=>{
+    this.http.get(`${environment.apiHostName}/portfolio`).subscribe(
+      (data) => {
         this.userService.updateUser(new User(<User>data))
         this.spinner.hide()
       },
-      (error) =>{
+      (error) => {
         this.spinner.hide()
       }
     )
   }
-  getResume(){
+  getResume() {
     const httpOptions = {
       responseType: 'blob' as 'json',
     };
-    return this.http.get(`${environment.apiHostName}/resume`,httpOptions)
+    return this.http.get(`${environment.apiHostName}/resume`, httpOptions)
   }
-  postNameAndBio(data){
+  postNameAndBio(data) {
     return this.http.post(`${environment.apiHostName}/nameandbio`, data)
   }
-  postUserContactSection(data?:any): Observable<any> {
+  postUserContactSection(data?: any): Observable<any> {
     data = data ? data : this.userService.getContact()
-    return this.http.post(`${environment.apiHostName}/usercontact`,data)
+    return this.http.post(`${environment.apiHostName}/usercontact`, data)
   }
-  postUserResumeSection(data?:any): Observable<any> {
+  postUserResumeSection(data?: any): Observable<any> {
     data = data ? data : this.userService.getResume()
     return this.http.post(`${environment.apiHostName}/userresume`, data)
   }
-  postUserAboutSection(data?:any){
+  postUserAboutSection(data?: any) {
     data = data ? data : this.userService.getAbout()
     return this.http.post(`${environment.apiHostName}/userabout`, data)
   }
-  postUserPortfolioSection(data?:any){
+  postUserPortfolioSection(data?: any) {
     data = data ? data : this.userService.getPortfolio()
     return this.http.post(`${environment.apiHostName}/userportfolio`, data)
   }
-  postMail(maildata:any){
+  postMail(maildata: any) {
     return this.http.post(`${environment.apiHostName}/mailservice`, maildata)
   }
-  postImageDataV2(data){
+  postImageDataV2(data) {
     return this.http.post(`${environment.apiHostName}/uploadimagev2`, data)
   }
 

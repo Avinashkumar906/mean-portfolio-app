@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiHostName: 'http://localhost:8080'
+  apiHostName: 'http://localhost:8080',
+  title: 'MEAN | Avi\'profile'
 };
 
 /*
