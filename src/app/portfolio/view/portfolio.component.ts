@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { Subscription } from 'rxjs';
 import { pluck } from 'rxjs/operators';
@@ -20,8 +20,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   shuffleInstance: any;
   selectedFile: File = null;
   userSubscription: Subscription;
-  shuffleInit: Boolean = false;
   portfolio: any = this.userService.getPortfolio();
+  @ViewChild('shuffle', { static: false }) shuffle: ElementRef;
+  groupList: Array<string> = []
+  selectedGroup: string;
 
   constructor(
     private modalService: NgxSmartModalService,
@@ -33,14 +35,23 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.initGroupList();
     this.userSubscription = this.userService.userData
       .pipe(pluck('project'))
       .subscribe(
         (portfolio) => {
           this.portfolio = portfolio;
+          this.initGroupList(portfolio);
+          setTimeout(() => this.initShuffle(), 0);
         },
         (err) => console.log(err),
       )
+  }
+
+  initGroupList(portfolio = this.portfolio) {
+    if (!portfolio) return;
+    portfolio.project.forEach((item) => this.groupList.push(...item.group))
+    this.groupList = Array.from(new Set(this.groupList));
   }
 
   upload(event) {
@@ -103,13 +114,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   }
 
   initShuffle() {
-    if (!this.shuffleInit) {
-      this.shuffleInstance = new Shuffle(document.querySelector('.portfolio-items'), {
-        itemSelector: '.items',
-        sizer: null
-      })
-      this.shuffleInit = true;
-    }
+    this.shuffleInstance = new Shuffle(this.shuffle.nativeElement, {
+      itemSelector: '.items',
+      sizer: null
+    })
   }
 
   openPopup(i: number) {
@@ -134,12 +142,9 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     )
   }
 
-  portfolioFilter(event) {
-    this.initShuffle()
-    document.querySelector('.portfolio-filters .active')
-      .removeAttribute('class') //remove active tab
-    event.target.className = 'active' //add css to active tab
-    this.shuffleInstance.filter(`${event.target.getAttribute("data-group")}`); // filtering projects
+  portfolioFilter(group) {
+    this.selectedGroup = group;
+    this.shuffleInstance.filter(group); // filtering projects
   }
 
   isLogged() {

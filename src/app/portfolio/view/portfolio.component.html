@@ -1,126 +1,102 @@
 <section class='section portfolio-section'>
-	<div class='section-block portfolio-block'>
-		<div class='container-fluid' *ngIf="portfolio;else noData">
-			<app-project-modal></app-project-modal>
-			<div class='section-header'>
-				<h2 class="h2" data-aos="fade-right">My
-					<strong class='color'>Works</strong>
-				</h2>
-			</div>
+  <div class='section-block portfolio-block'>
+    <div class='container-fluid' *ngIf="portfolio;else noData">
+      <app-project-modal></app-project-modal>
+      <div class='section-header'>
+        <h2 class="h2" data-aos="fade-right">My
+          <strong class='color'>Works</strong>
+        </h2>
+      </div>
 
-			<ul class='portfolio-filters' data-aos="fade-up">
-				<li>
-					<a class='active' data-group='all' (click)='portfolioFilter($event)'>
-						All
-					</a>
-				</li>
-				<li>
-					<a data-group='web' (click)='portfolioFilter($event)'>
-						Web
-					</a>
-				</li>
-				<li>
-					<a data-group='tech' (click)='portfolioFilter($event)'>
-						Tech
-					</a>
-				</li>
-				<li>
-					<a data-group='gallery' (click)='portfolioFilter($event)'>
-						Gallery
-					</a>
-				</li>
-				<li>
-					<a data-group='business' (click)='portfolioFilter($event)'>
-						Business
-					</a>
-				</li>
-				<li>
-					<a data-group='demo' (click)='portfolioFilter($event)'>
-						Demo
-					</a>
-				</li>
-			</ul>
+      <ul class='portfolio-filters' data-aos="fade-up">
+        <li>
+          <a [ngClass]="{'active': !selectedGroup}" data-group='all' (click)='portfolioFilter("all")'>
+            All
+          </a>
+        </li>
+        <li *ngFor="let group of groupList">
+          <a [attr.data-group]='group' [ngClass]="{'active':selectedGroup === group}" (click)='portfolioFilter(group)'>
+            {{group}}
+          </a>
+        </li>
+      </ul>
 
-			<ul class='portfolio-items' id="grid">
-				<li class="items" *ngFor="let item of portfolio.project; let i = index" data-aos="fade-up"
-					attr.data-groups='"[{{item.group}}]"'>
-					<div class='inner portfolio' [style.background-image]="'url(' + item.image + ')'">
-						<div class='overlay'>
-							<div class="m-auto text-center overlay-btn-group">
-								<button type="button" class="btn-color mb-2" (click)="openPopup(i)">view</button>
-								<div class="w-100 service-btn" *ngIf="isEditMode()">
-									<button type="button" class="btn-color m-1" (click)="moveUp(i)"><i
-											class='fas fa-arrow-up'></i></button>
-									<button type="button" class="btn-color m-1" (click)="moveDown(i)"><i
-											class='fas fa-arrow-down'></i></button>
-									<button type="button" class="btn-color m-1" (click)="removeProject(i)"><i
-											class='fas fa-times'></i></button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
+      <ul class='portfolio-items' #shuffle id="grid">
+        <li class="items" *ngFor="let item of portfolio.project; let i = index" data-aos="fade-up"
+          attr.data-groups='"[{{item.group}}]"'>
+          <div class='inner portfolio' [style.background-image]="'url(' + item.image + ')'">
+            <div class='overlay'>
+              <div class="m-auto text-center overlay-btn-group">
+                <button type="button" class="btn-color mb-2" (click)="openPopup(i)">view</button>
+                <div class="w-100 service-btn" *ngIf="isEditMode()">
+                  <button type="button" class="btn-color m-1" (click)="moveUp(i)"><i
+                      class='fas fa-arrow-up'></i></button>
+                  <button type="button" class="btn-color m-1" (click)="moveDown(i)"><i
+                      class='fas fa-arrow-down'></i></button>
+                  <button type="button" class="btn-color m-1" (click)="removeProject(i)"><i
+                      class='fas fa-times'></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
 
-			<div class="w-100 project-add-section" *ngIf="isEditMode()">
-				<form #project='ngForm' (ngSubmit)="submit(project)" novalidate>
-					<input class="form-control-file" type="file" #uploader (change)="upload($event)" hidden>
-					<div class="form-row">
-						<div class="col-md-6 form-group">
-							<input class="form-control" type="text" name="name" placeholder="Name" ngModel required>
-						</div>
-						<div class="col-md-6 form-group">
-							<input class="form-control" type="text" name='title' placeholder="Title" ngModel required>
-						</div>
-						<div class="col-md-6 form-group">
-							<input class="form-control" type="text" name='link' placeholder="Url Link" ngModel>
-						</div>
-						<div class="col-md-6 form-group">
-							<input class="form-control" type="text" name='git' placeholder="Fork Link" ngModel>
-						</div>
-						<div class="col-md-6 form-group">
-							<input class="form-control" type="text" name='group' placeholder="Group Comma Separated"
-								ngModel>
-						</div>
-						<div class="col-md-6 form-group">
-							<input class="form-control" type="text" name='youtube' placeholder="Video Link" ngModel>
-						</div>
-						<div class="col-md-12 form-group">
-							<div *ngIf="!selectedFile">
-								<input class="form-control" type="text" name="image" placeholder="Paste image URL"
-									ngModel>
-							</div>
-							<span class="h6 mt-2 d-block text-center"
-								*ngIf="!project.value.image && !selectedFile">OR</span>
-							<span *ngIf="!project.value.image" class="h5 mt-0 d-block text-center"
-								style="cursor:pointer;"
-								(click)="uploader.click()">{{!selectedFile ? "click to upload Image" : selectedFile.name +" OR click to change"}}</span>
-						</div>
-						<div class="col-12 form-group">
-							<textarea class="form-control" rows="2" name="description" placeholder="Description" ngModel
-								required></textarea>
-						</div>
-						<div class="col-12 form-group text-center">
-							<button type="submit" class="btn-color" [disabled]="!project.valid ">ADD</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div *ngIf="isLogged()" class="sticky-bottom">
-			<button class="btn-color sticky-bottom-button mx-1" (click)="savePortfolioData()">Save</button>
-			<button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">edit</button>
-		</div>
-	</div>
-	<ng-template #noData>
-		<div class="row align-items-center">
-			<div class="col">
-				<div class="text-center">
-					<h2 class="h2">
-						Unable to connect to server!
-					</h2>
-				</div>
-			</div>
-		</div>
-	</ng-template>
+      <div class="w-100 project-add-section" *ngIf="isEditMode()">
+        <form #project='ngForm' (ngSubmit)="submit(project)" novalidate>
+          <input class="form-control-file" type="file" #uploader (change)="upload($event)" hidden>
+          <div class="form-row">
+            <div class="col-md-6 form-group">
+              <input class="form-control" type="text" name="name" placeholder="Name" ngModel required>
+            </div>
+            <div class="col-md-6 form-group">
+              <input class="form-control" type="text" name='title' placeholder="Title" ngModel required>
+            </div>
+            <div class="col-md-6 form-group">
+              <input class="form-control" type="text" name='link' placeholder="Url Link" ngModel>
+            </div>
+            <div class="col-md-6 form-group">
+              <input class="form-control" type="text" name='git' placeholder="Fork Link" ngModel>
+            </div>
+            <div class="col-md-6 form-group">
+              <input class="form-control" type="text" name='group' placeholder="Group Comma Separated" ngModel>
+            </div>
+            <div class="col-md-6 form-group">
+              <input class="form-control" type="text" name='youtube' placeholder="Video Link" ngModel>
+            </div>
+            <div class="col-md-12 form-group">
+              <div *ngIf="!selectedFile">
+                <input class="form-control" type="text" name="image" placeholder="Paste image URL" ngModel>
+              </div>
+              <span class="h6 mt-2 d-block text-center" *ngIf="!project.value.image && !selectedFile">OR</span>
+              <span *ngIf="!project.value.image" class="h5 mt-0 d-block text-center" style="cursor:pointer;"
+                (click)="uploader.click()">{{!selectedFile ? "click to upload Image" : selectedFile.name +" OR click to change"}}</span>
+            </div>
+            <div class="col-12 form-group">
+              <textarea class="form-control" rows="2" name="description" placeholder="Description" ngModel
+                required></textarea>
+            </div>
+            <div class="col-12 form-group text-center">
+              <button type="submit" class="btn-color" [disabled]="!project.valid ">ADD</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="isLogged()" class="sticky-bottom">
+      <button class="btn-color sticky-bottom-button mx-1" (click)="savePortfolioData()">Save</button>
+      <button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">edit</button>
+    </div>
+  </div>
+  <ng-template #noData>
+    <div class="row align-items-center">
+      <div class="col">
+        <div class="text-center">
+          <h2 class="h2">
+            Unable to connect to server!
+          </h2>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </section>

@@ -7,32 +7,32 @@ import { environment } from 'src/environments/environment'
 })
 export class AuthService {
 
-  editmode:boolean = false;
+  editmode: boolean = false;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  isAuthenticated() : boolean{
+  isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    if(!token){
+    if (!token) {
       return false;
     } else {
       return true;
     }
   }
-  isEditMode(){
-    if(this.isAuthenticated()){
+  isEditMode() {
+    if (this.isAuthenticated()) {
       return this.editmode;
     } else {
       return false;
     }
   }
-  toggleEditmaode(){
+  toggleEditmaode() {
     this.editmode = !this.editmode;
   }
-  loginUser(data){
+  loginUser(data) {
     return this.http.post(`${environment.apiHostName}/signin`, data)
   }
-  signupUser(data){
+  signupUser(data) {
     return this.http.post(`${environment.apiHostName}/signup`, data)
   }
 

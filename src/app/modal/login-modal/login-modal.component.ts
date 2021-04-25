@@ -1,9 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { trigger, transition, style, animate, state, query, stagger, group } from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -11,27 +10,33 @@ import { trigger, transition, style, animate, state, query, stagger, group } fro
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.scss']
 })
-export class LoginModalComponent implements AfterViewInit{
+export class LoginModalComponent implements AfterViewInit {
 
   constructor(
     private authService: AuthService,
-    private modalPopup:NgxSmartModalService,
+    private modalPopup: NgxSmartModalService,
+    private spinner: NgxSpinnerService,
   ) { }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
   }
 
 
-  login(f:NgForm){
+  login(f: NgForm) {
+    this.spinner.show()
     this.authService.loginUser(f.value).subscribe(
-      (response : any)=>{
-        if(response){
-          localStorage.setItem("token",response.token.toString())
-          localStorage.setItem("user",JSON.stringify(response.user));
+      (response: any) => {
+        if (response) {
+          this.spinner.hide()
+          localStorage.setItem("token", response.token.toString())
+          localStorage.setItem("user", JSON.stringify(response.user));
           this.modalPopup.close('loginModal')
         }
       },
-      (err)=>{alert(err.error.message)}
+      (err) => {
+        this.spinner.hide()
+        alert(err.error.message)
+      }
     )
   }
 }
