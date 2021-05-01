@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { routerTransition } from './router.animations'
 import { HttpserviceService } from './service/httpservice.service';
 import * as AOS from 'aos';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',

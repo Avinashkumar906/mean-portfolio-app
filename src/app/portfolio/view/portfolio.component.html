@@ -10,20 +10,33 @@
 
       <ul class='portfolio-filters' data-aos="fade-up">
         <li>
-          <a [ngClass]="{'active': !selectedGroup}" data-group='all' (click)='portfolioFilter("all")'>
+          <a [ngClass]="{'active': !selectedGroup}" data-group='all' (click)='!isEditMode() && portfolioFilter("all")'>
             All
           </a>
         </li>
         <li *ngFor="let group of groupList">
-          <a [attr.data-group]='group' [ngClass]="{'active':selectedGroup === group}" (click)='portfolioFilter(group)'>
+          <a [attr.data-group]='group' [ngClass]="{'active':selectedGroup === group}"
+            (click)='!isEditMode() && portfolioFilter(group)'>
             {{group}}
           </a>
         </li>
       </ul>
 
-      <ul class='portfolio-items' #shuffle id="grid">
+      <ul class='portfolio-items' #shuffle id="grid" *ngIf="!isEditMode()">
         <li class="items" *ngFor="let item of portfolio.project; let i = index" data-aos="fade-up"
           attr.data-groups='"[{{item.group}}]"'>
+          <div class='inner portfolio' [style.background-image]="'url(' + item.image + ')'">
+            <div class='overlay'>
+              <div class="m-auto text-center overlay-btn-group">
+                <button type="button" class="btn-color mb-2" (click)="openPopup(i)">view</button>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class='portfolio-items' id="grid" *ngIf="isEditMode()">
+        <li class="items" *ngFor="let item of portfolio.project; let i = index" data-aos="fade-up">
           <div class='inner portfolio' [style.background-image]="'url(' + item.image + ')'">
             <div class='overlay'>
               <div class="m-auto text-center overlay-btn-group">

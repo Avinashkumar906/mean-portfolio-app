@@ -7,6 +7,7 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 //user defined modules are lazily loaded at runtime
 
@@ -15,7 +16,7 @@ import { UserserviceService } from './service/userservice.service'
 import { HttpserviceService } from './service/httpservice.service';
 import { AuthService } from './service/auth.service';
 import { AuthInterceptorService } from './service/auth-interceptor.service';
-import {ArrayOperationService} from './service/array-operation.service'
+import { ArrayOperationService } from './service/array-operation.service'
 
 //default components to be loaded at app startup
 import { HomeComponent } from './home/home.component';
@@ -24,6 +25,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarBtnComponent } from './navbar/navbar-btn/navbar-btn.component';
 import { LoginModalComponent } from './modal/login-modal/login-modal.component'
 import { NavbarMenuComponent } from './navbar/navbar-menu/navbar-menu.component';
+
+// reducer import
+import { userReducer } from './reducers/user.reducer';
 
 @NgModule({
   declarations: [
@@ -40,12 +44,13 @@ import { NavbarMenuComponent } from './navbar/navbar-menu/navbar-menu.component'
     BrowserAnimationsModule,
     NgxSpinnerModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
-    NgxSmartModalModule.forRoot()
+    NgxSmartModalModule.forRoot(),
+    StoreModule.forRoot({ userData: userReducer }),
   ],
-  providers: [ UserserviceService, HttpserviceService, AuthService, ArrayOperationService, 
-    {provide:HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
+  providers: [UserserviceService, HttpserviceService, AuthService, ArrayOperationService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

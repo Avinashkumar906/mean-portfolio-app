@@ -1,11 +1,12 @@
 import { NgForm } from '@angular/forms';
-import { pluck } from 'rxjs/operators'
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserserviceService } from '../../service/userservice.service';
+import { Store } from '@ngrx/store';
 import { HttpserviceService } from '../../service/httpservice.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/service/auth.service';
+import { User } from 'src/app/class/user';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-contact',
@@ -15,30 +16,30 @@ import { AuthService } from 'src/app/service/auth.service';
 export class ContactComponent implements OnInit {
 
   // @ViewChild('f',{read: NgForm, static:true}) form;
-  private userSubscription:Subscription;
-
-  contact:any = this.userService.getContact() ;
+  private userSubscription: Subscription;
+  userData: Observable<User>;
+  contact: any;
 
   constructor(
-    private userService: UserserviceService,
     private spinner: NgxSpinnerService,
-    private httpService:HttpserviceService,
-    private authService:AuthService
-  ) { }
+    private httpService: HttpserviceService,
+    private authService: AuthService,
+    private store: Store
+  ) {
+    this.userData = this.store.select((state: any) => state.userData)
+  }
 
   ngOnInit() {
-    this.userSubscription = this.userService.userData
-    .pipe(pluck('contact'))
-    .subscribe(
-      (contact) => {
-        console.log(contact)
-        this.contact = contact;
-      },
-      (err)=>console.log(err),
-      ()=>this.spinner.hide()
-    )
+    this.userSubscription = this.userData
+      .subscribe(
+        (user) => {
+          this.contact = user && _.cloneDeep(user.contact);
+        },
+        (err) => console.log(err),
+        () => this.spinner.hide()
+      )
   }
-  onSubmit(form:NgForm){
+  onSubmit(form: NgForm) {
     this.spinner.show()
     let data = new Object({
       to: "avinashkumar906@gmail.com",
@@ -47,36 +48,37 @@ export class ContactComponent implements OnInit {
       html: ` <h2>Hi Sandy,</h2><br/><h2>${form.value.message}</h2><br/><h4>Regards,</h4><h4>${form.value.name}</h4>`,
     })
     this.httpService.postMail(data).subscribe(
-      (response)=>{
-          form.resetForm()
-          this.spinner.hide()
-          alert('Mail send!')
+      (response) => {
+        form.resetForm()
+        this.spinner.hide()
+        alert('Mail send!')
       },
-      (err)=>{
+      (err) => {
         this.spinner.hide()
         alert('Error in snding Mail !')
         console.log(err)
       },
     )
   }
-  isLogged(){
+  isLogged() {
     return this.authService.isAuthenticated()
   }
-  toggleEdit(){
+  toggleEdit() {
     this.authService.toggleEditmaode();
   }
-  isEditMode(){
+  isEditMode() {
     return this.authService.isEditMode();
   }
-  saveContactData(){
-    this.httpService.postUserContactSection().subscribe(
-      data=>{
+  saveContactData() {
+    console.log(this.contact)
+    this.httpService.postUserContactSection(this.contact).subscribe(
+      data => {
         alert('Updated Successfully!')
       },
-      err=>alert('Server Error!')
+      err => alert('Server Error!')
     )
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.userSubscription.unsubscribe()
   }
 }

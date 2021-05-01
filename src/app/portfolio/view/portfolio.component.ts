@@ -1,14 +1,15 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { Subscription } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { UserserviceService } from '../../service/userservice.service';
 import Shuffle from 'shufflejs';
+import { Store } from '@ngrx/store';
 import { HttpserviceService } from 'src/app/service/httpservice.service';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { ArrayOperationService } from 'src/app/service/array-operation.service';
+import { User } from 'src/app/class/user';
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-portfolio',
@@ -20,29 +21,33 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   shuffleInstance: any;
   selectedFile: File = null;
   userSubscription: Subscription;
-  portfolio: any = this.userService.getPortfolio();
-  @ViewChild('shuffle', { static: false }) shuffle: ElementRef;
-  groupList: Array<string> = []
+  portfolio: any;
   selectedGroup: string;
+  groupList: Array<string> = [];
+  userData: Observable<User>;
+  @ViewChild('shuffle', { static: false }) shuffle: ElementRef;
 
   constructor(
     private modalService: NgxSmartModalService,
-    private userService: UserserviceService,
+    private store: Store,
     private httpService: HttpserviceService,
     private authService: AuthService,
     private spinner: NgxSpinnerService,
     private arrayService: ArrayOperationService
-  ) { }
+  ) {
+    this.userData = this.store.select((state: any) => state.userData);
+  }
 
   ngOnInit() {
     this.initGroupList();
-    this.userSubscription = this.userService.userData
-      .pipe(pluck('project'))
+    this.userSubscription = this.userData
       .subscribe(
-        (portfolio) => {
-          this.portfolio = portfolio;
-          this.initGroupList(portfolio);
-          setTimeout(() => this.initShuffle(), 0);
+        (user) => {
+          if (user) {
+            this.portfolio = _.cloneDeep(user.project);
+            this.initGroupList(this.portfolio);
+            setTimeout(() => this.initShuffle(), 0);
+          }
         },
         (err) => console.log(err),
       )
@@ -134,7 +139,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   savePortfolioData() {
     this.spinner.show()
-    this.httpService.postUserPortfolioSection().subscribe(
+    this.httpService.postUserPortfolioSection(this.portfolio).subscribe(
       data => {
         this.spinner.hide();
       },

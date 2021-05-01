@@ -5,6 +5,7 @@ import { User } from '../class/user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserserviceService } from './userservice.service';
 import { environment } from 'src/environments/environment'
+import { Store } from '@ngrx/store';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +14,16 @@ export class HttpserviceService {
   constructor(
     private http: HttpClient,
     private spinner: NgxSpinnerService,
-    private userService: UserserviceService
+    private userService: UserserviceService,
+    private store: Store
   ) { }
 
   getUserData() {
     this.spinner.show();
     this.http.get(`${environment.apiHostName}/portfolio`).subscribe(
       (data) => {
-        this.userService.updateUser(new User(<User>data))
+        let user = new User(<User>data);
+        this.store.dispatch({ type: "ADD", payload: user })
         this.spinner.hide()
       },
       (error) => {
