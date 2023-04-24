@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiHostName: 'http://localhost:8080',
-  // apiHostName: 'https://api4asquare.herokuapp.com',
+  // apiHostName: 'https://asquare.onrender.com'
   title: 'MEAN | Avi\'profile'
 };
 

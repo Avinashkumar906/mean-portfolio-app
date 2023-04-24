@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiHostName: 'https://api4asquare.herokuapp.com',
-  title: 'MEAN | Avi\'profile'
+  title: 'MEAN | Avi\'profile',
+  apiHostName: 'https://asquare.onrender.com'
 };
