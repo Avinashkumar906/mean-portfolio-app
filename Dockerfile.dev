@@ -1,0 +1,17 @@
+
+FROM node:11.0.0-slim AS dev   
+
+WORKDIR /app
+
+# COPY package.json package-lock.json  ./
+COPY .  .
+
+# RUN npm install && npm run build && rm -rf ./node_modules/
+RUN npm install
+RUN npm i -g @angular/cli@8.3.0
+
+# exposing port to local usage
+EXPOSE 4200
+
+
+CMD [ "ng","serve","--host", "0.0.0.0" ]

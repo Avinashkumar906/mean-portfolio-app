@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiHostName: 'http://localhost:8080',
-  // apiHostName: 'https://asquare.onrender.com'
+  // apiHostName: 'http://localhost:8080',
+  apiHostName: 'https://asquare.onrender.com',
   title: 'MEAN | Avi\'profile'
 };
 
