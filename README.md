@@ -23,5 +23,15 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
+To install git in docker env:
+
+replace deb.debian.org with archive.debian.org:
+sudo sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
+
+replace security.debian.org with archive.debian.org/debian-security/:
+sudo sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list 
+
+remove line that contains source stretch-updates:
+sudo sed -i '/stretch-updates/d' /etc/apt/sources.list
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
