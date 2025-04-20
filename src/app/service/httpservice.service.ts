@@ -13,24 +13,19 @@ export class HttpserviceService {
 
   constructor(
     private http: HttpClient,
-    private spinner: NgxSpinnerService,
     private userService: UserserviceService,
-    private store: Store
   ) { }
 
-  getUserData() {
-    this.spinner.show();
-    this.http.get(`${environment.apiHostName}/portfolio`).subscribe(
-      (data) => {
-        let user = new User(<User>data);
-        this.store.dispatch({ type: "ADD", payload: user })
-        this.spinner.hide()
-      },
-      (error) => {
-        this.spinner.hide()
-      }
-    )
+  getUserData(email?: string) {
+    console.log('=====>', email);
+    let url = `${environment.apiHostName}/portfolio`;
+    if (email) {
+      url += `?email=${encodeURIComponent(email)}`;
+    }
+    return this.http.get(url);
   }
+  
+
   getResume() {
     const httpOptions = {
       responseType: 'blob' as 'json',
