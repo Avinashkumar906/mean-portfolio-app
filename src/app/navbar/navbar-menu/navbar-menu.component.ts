@@ -14,17 +14,29 @@ export class NavbarMenuComponent implements OnInit {
     private modalService :NgxSmartModalService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  navLinks = [
+    { label: 'Home', path: '/index' },
+    { label: 'About', path: '/about' },
+    { label: 'Resume', path: '/resume' },
+    { label: 'Portfolio', path: '/portfolio' },
+    { label: 'Contact', path: '/contact' }
+  ];
+  
   toggleSignin(){
     if(!this.authService.isAuthenticated())
       this.modalService.open('loginModal')
     else
       localStorage.removeItem("token")
   }
+
   isloggedIn(){
     return this.authService.isAuthenticated()
+  }
+
+  toggleEdit() {
+    this.authService.toggleEditmaode();
   }
 
 }

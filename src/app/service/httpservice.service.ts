@@ -17,7 +17,6 @@ export class HttpserviceService {
   ) { }
 
   getUserData(email?: string) {
-    console.log('=====>', email);
     let url = `${environment.apiHostName}/portfolio`;
     if (email) {
       url += `?email=${encodeURIComponent(email)}`;

@@ -1,39 +1,38 @@
-<section class='d-flex align-items-center justify-content-center section section-main h-100 w-100'
-  [style.background-image]="getBackground()" style="overflow: hidden;">
+
+<section class='d-flex align-items-center justify-content-center section section-main h-100 w-100' style="overflow: hidden;">
+  <!-- [style.background-image]="'url(' + user?.image  + ')'" -->
   <div class='inner w-100' *ngIf="user ; else noData">
-    <div class='intro-text' data-aos="fade-in">
+    <div class='intro-text hero-content' data-aos="fade-in">
       <h1 class="h1" data-aos="flip-up">
-        <span>Hey, I'm </span>
-        <span class="highlight"> {{ user?.name }}.</span>
+        <span>Hey, I am </span>
+        <span class="highlight"> {{ user?.name }}. </span>
       </h1>
       <p class="p" data-aos="flip-down">{{ user?.bio }}</p>
-      <div *ngIf="!isAuthenticated()" class='intro-btns'>
+      <div class='intro-btns'>
         <a [routerLink]="['/about']" data-aos="fade-right" class='btn-custom'>
-          Discover More
+          About
         </a>
         <a [routerLink]="['/contact']" data-aos="fade-left" class='btn-custom'>
-          Hire Me
+          Contact Me
         </a>
       </div>
-      <div *ngIf="isAuthenticated()" class='intro-btns'>
-        <div *ngIf="isEditMode()" class="m-auto" style="max-width:500px">
+      <div *ngIf="isEditMode()" class='intro-btns'>
+        <div class="m-auto" style="max-width:500px">
           <div class="form-group">
             <input class="form-control" type="text" [(ngModel)]="user.name" />
           </div>
           <div class="form-group">
             <input class="form-control" type="text" [(ngModel)]="user.bio" />
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <input class="form-control" type="text" [(ngModel)]="user.image" />
-          </div>
+          </div> -->
         </div>
-        <a data-aos="fade-right" class='btn-custom' (click)="toggleEdit()">
-          Edit
-        </a>
-        <a data-aos="fade-left" class='btn-custom' (click)="saveToServer()">
-          Save
-        </a>
       </div>
+    </div>
+    <div *ngIf="isEditMode()" class="sticky-bottom">
+      <button class="btn-custom sticky-bottom-button mx-1" (click)="saveToServer()">Save</button>
+      <button class="btn-custom sticky-bottom-button mx-1" (click)="toggleEdit()">Close</button>
     </div>
   </div>
 </section>

@@ -35,31 +35,29 @@ export class HomeComponent implements OnInit, OnDestroy {
       (err) => console.log(err),
     )
   }
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe()
-  }
-  getBackground() {
-    let background: String;
-    if (this.user) {
-      background = `url(${this.user.image})`
-    }
-    return background;
-  }
+
   saveToServer() {
     this.spinner.show();
-    let data = new Object({ name: this.user.name, bio: this.user.bio, image: this.user.image })
+    let data = new Object({ name: this.user.name, bio: this.user.bio})
     this.httpService.postNameAndBio(data).subscribe(
       (response) => this.spinner.hide(),
       (err) => { this.spinner.hide(); alert('Server Error!'); }
     )
   }
+
   isEditMode() {
     return this.authService.isEditMode()
   }
+
   toggleEdit() {
     this.authService.toggleEditmaode();
   }
+
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated()
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe()
   }
 }

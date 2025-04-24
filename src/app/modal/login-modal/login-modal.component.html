@@ -3,8 +3,12 @@
     <div class="wrapper">
       <div class="col-12">
         <div class="login-form">
-          <h2 class="h2">Login</h2>
-          <form #f="ngForm" (ngSubmit)="f.valid && login(f)" novalidate autocomplete="off">
+          <h2 class="h2">{{!isNewUser ? 'Signin' : 'Signup'}}</h2>
+          <form #f="ngForm" (ngSubmit)="f.valid && onSubmit(f)" novalidate autocomplete="off">
+            <div *ngIf="isNewUser" class="form-group">
+              <input type="text" class="form-control" height="40px" placeholder="Your Name *" name="name" ngModel
+                minlength="4" required>
+            </div>
             <div class="form-group">
               <input type="text" class="form-control" height="40px" placeholder="Your Email *" name="email" ngModel
                 minlength="4" required>
@@ -14,7 +18,11 @@
                 ngModel minlength="4" required>
             </div>
             <div class="form-group text-center">
-              <button type="submit" class="btn-color" [disabled]="!f.valid">Login</button>
+              <button *ngIf="!isNewUser" type="submit" class="btn-color" [disabled]="!f.valid">Signin</button>
+              <button *ngIf="isNewUser" type="submit" class="btn-color" [disabled]="!f.valid">Signup</button>
+              <button (click)="toggleForm()" class="ml-2 btn-color" type="button">
+                {{isNewUser ? 'Existing user' : 'New user'}}
+              </button>
             </div>
           </form>
         </div>

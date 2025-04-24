@@ -1,34 +1,15 @@
 <div class='menu'>
 	<div class='inner'>
 		<ul class='menu-items'>
-			<li>
-				<a class='section-toggle' [routerLink]="'/index'" [routerLinkActive]="['active']">
-					Home
-				</a>
-			</li>
-			<li>
-				<a class='section-toggle' [routerLink]="'/about'" [routerLinkActive]="['active']">
-					About
-				</a>
-			</li>
-			<li>
-				<a class='section-toggle' [routerLink]="'/resume'" [routerLinkActive]="['active']">
-					Resume
-				</a>
-			</li>
-			<li>
-				<a class='section-toggle' [routerLink]="'/portfolio'" [routerLinkActive]="['active']">
-					Portfolio
-				</a>
-			</li>
-			<li>
-				<a class='section-toggle' [routerLink]="'/contact'" [routerLinkActive]="['active']">
-					Contact
+			<li *ngFor="let link of navLinks">
+				<a class="section-toggle" [routerLink]="link.path" [routerLinkActive]="['active']" queryParamsHandling="preserve">
+				  {{ link.label }}
 				</a>
 			</li>
 		</ul>
-    <div class="d-block w-100 text-center bottom ">
-      <button class="btn-color text-light" (click)="toggleSignin()">{{!isloggedIn() ? 'login' : 'logout'}}</button>
+    <div class="px-2 d-flex w-100 flex-column bottom" style="gap: .5rem;" >
+		<button class="btn-custom text-light" *ngIf="authService.isAuthenticated()" (click)="toggleEdit()">Edit Mode</button>
+		<button class="btn-custom text-light" (click)="toggleSignin()">{{!isloggedIn() ? 'login' : 'logout'}}</button>
     </div>
 	</div>
 </div>

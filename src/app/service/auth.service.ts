@@ -13,25 +13,21 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    } else {
-      return true;
-    }
+    return token ? true : false;
   }
+  
   isEditMode() {
-    if (this.isAuthenticated()) {
-      return this.editmode;
-    } else {
-      return false;
-    }
+    return this.isAuthenticated() ? this.editmode : false; 
   }
+
   toggleEditmaode() {
     this.editmode = !this.editmode;
   }
+
   loginUser(data) {
     return this.http.post(`${environment.apiHostName}/signin`, data)
   }
+  
   signupUser(data) {
     return this.http.post(`${environment.apiHostName}/signup`, data)
   }

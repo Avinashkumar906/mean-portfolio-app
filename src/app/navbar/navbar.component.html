@@ -1,10 +1,10 @@
 <!--=====================================================
     Menu
 =====================================================-->
-<app-navbar-menu (mouseleave)="closeMenu()"></app-navbar-menu>
+<app-navbar-menu (blur)="closeMenu()"></app-navbar-menu>
 
 <!--=====================================================
     Menu Btn   
 =====================================================-->
 
-<app-navbar-btn (click)="toggleMenu()" (mouseenter)="openMenu()"></app-navbar-btn>
+<app-navbar-btn (click)="toggleMenu()" (focus)="openMenu()"></app-navbar-btn>

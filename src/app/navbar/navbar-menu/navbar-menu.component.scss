@@ -1,3 +1,10 @@
+.main-nav{
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  // border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
 .active{
     color: #fff;
     // transform: scale(1.1);
