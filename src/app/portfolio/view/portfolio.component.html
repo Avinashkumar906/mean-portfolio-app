@@ -96,9 +96,9 @@
         </form>
       </div>
     </div>
-    <div *ngIf="isLogged()" class="sticky-bottom">
-      <button class="btn-color sticky-bottom-button mx-1" (click)="savePortfolioData()">Save</button>
-      <button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">edit</button>
+    <div *ngIf="authService.isEditMode()" class="sticky-bottom">
+      <button class="btn-custom sticky-bottom-button mx-1" (click)="savePortfolioData()">Save</button>
+      <button class="btn-custom sticky-bottom-button mx-1" (click)="toggleEdit()">Close</button>
     </div>
   </div>
   <ng-template #noData>

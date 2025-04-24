@@ -8,9 +8,9 @@
 
 		<app-testimonial [testimonial]='resume && resume?.testimonial ? resume?.testimonial : undefined '></app-testimonial>
 
-    <div *ngIf="isLoggedIn()" class="sticky-bottom">
+    <div *ngIf="authService.isEditMode()" class="sticky-bottom">
       <button class="btn-color sticky-bottom-button mx-1" (click)="saveResumeData()">Save</button>
-      <button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">edit</button>
+      <button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">Close</button>
     </div>
 
 	</div>

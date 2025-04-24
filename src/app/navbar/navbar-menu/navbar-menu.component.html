@@ -7,7 +7,7 @@
 				</a>
 			</li>
 		</ul>
-    <div class="px-2 d-flex w-100 flex-column bottom" style="gap: .5rem;" >
+    <div class="px-4 d-flex w-100 flex-column bottom" style="gap: .5rem;" >
 		<button class="btn-custom text-light" *ngIf="authService.isAuthenticated()" (click)="toggleEdit()">Edit Mode</button>
 		<button class="btn-custom text-light" (click)="toggleSignin()">{{!isloggedIn() ? 'login' : 'logout'}}</button>
     </div>

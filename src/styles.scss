@@ -134,8 +134,8 @@ img {
 	backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-	border-top-left-radius: 1rem;
-	border-bottom-left-radius: 1rem;
+	// border-top-left-radius: 1rem;
+	// border-bottom-left-radius: 1rem;
 	top: 0;
 	right: 0;
 	height: 100%;
@@ -875,8 +875,8 @@ img {
 	button css
 =======================================================*/
 .btn-custom {
-	color: #FFF !important;
-	cursor: pointer !important;
+	color: #FFF ;
+	cursor: pointer ;
 	letter-spacing: 4px;
 	text-transform: uppercase;
 	text-decoration: none !important;
@@ -894,7 +894,7 @@ img {
 	transition: all 0.3s ease;
 	&:disabled {
 		cursor: not-allowed;
-		opacity: .6;
+		// opacity: .6;
 	}
 
 	&:after {
@@ -923,7 +923,7 @@ img {
 }
 
 .btn-color {
-	cursor: pointer !important;
+	cursor: pointer;
 	letter-spacing: 4px;
 	color:#202020;
 	text-transform: uppercase;
@@ -947,7 +947,7 @@ img {
 	}
 	&:disabled {
 		cursor: not-allowed;
-		opacity: .6;
+		// opacity: .6;
 	}
 
 	&:after {
@@ -1000,8 +1000,6 @@ img {
 	backdrop-filter: blur(10px);
 	background: rgba(0, 0, 0, 0.8);
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-	border-top-left-radius: 1rem;
-	border-top-right-radius: 1rem;
 
 	animation: slideUpIn 0.4s ease-out;
 

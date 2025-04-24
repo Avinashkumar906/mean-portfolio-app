@@ -41,9 +41,11 @@ export class AboutComponent implements OnInit, OnDestroy {
   isLogged() {
     return this.authService.isAuthenticated();
   }
+
   toggleEdit() {
     this.authService.toggleEditmaode()
   }
+  
   ngOnDestroy() {
     this.userSubscription.unsubscribe()
   }

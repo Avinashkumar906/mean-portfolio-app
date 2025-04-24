@@ -9,9 +9,9 @@
 
 		<app-pricing [pricing]='about && about.pricing ? about.pricing : undefined'></app-pricing>
 
-		<div *ngIf="isLogged()" class="sticky-bottom">
-			<button class="btn-color sticky-bottom-button mx-1" (click)="saveAboutData()">Save</button>
-			<button class="btn-color sticky-bottom-button mx-1" (click)="toggleEdit()">edit</button>
+		<div *ngIf="authService.isEditMode()" class="sticky-bottom">
+			<button class="btn-custom sticky-bottom-button mx-1" (click)="saveAboutData()">Save</button>
+			<button class="btn-custom sticky-bottom-button mx-1" (click)="toggleEdit()">Close</button>
 		</div>
 
 	</div>
